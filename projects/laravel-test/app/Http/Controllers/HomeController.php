@@ -5,7 +5,6 @@ class HomeController extends Controller
 {
     public function index($langCode = null)
     {
-        $this->data['SeoTitle'] = 'berkan';
-        return view('Home/index', $this->data);
+        return view('Home/index');
     }
 }

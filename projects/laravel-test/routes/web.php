@@ -16,3 +16,8 @@ Route::get('/', function ()
 {
     return view('welcome');
 });
+//Route::get('/home', [\App\Http\Controllers\HomeController::class, "index"]);
+/*
+ * Laravel 8'e kadar bu tanım düzgün çalışıyor.
+ */
+Route::get('/home', "HomeController@index");
