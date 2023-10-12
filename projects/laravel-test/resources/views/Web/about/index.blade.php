@@ -3,7 +3,7 @@
 
 @endsection
 @section("content")
-    <p>Home Page Content</p>
+    <p>About Us Content</p>
 @endsection
 @section("scripts")
 

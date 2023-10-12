@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function ()
+/*Route::get('/', function ()
 {
     return view('welcome');
-});
+});*/
 //Route::get('/home', [\App\Http\Controllers\HomeController::class, "index"]);
 /*
  * Laravel 8'e kadar bu tanım düzgün çalışıyor.
  */
-Route::get('/home', "HomeController@index");
+//Route::get('/', "HomeController@index");
+//Route::get('/', function () { return view('web.home.index'); })->name('home');
+Route::get('/', [\App\Http\Controllers\HomeController::class, "index"])->name('home');
+Route::get('/about', [\App\Http\Controllers\AboutController::class, "index"])->name('about');
