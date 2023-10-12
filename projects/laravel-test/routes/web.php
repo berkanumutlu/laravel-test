@@ -22,5 +22,7 @@ use Illuminate\Support\Facades\Route;
  */
 //Route::get('/', "HomeController@index");
 //Route::get('/', function () { return view('web.home.index'); })->name('home');
-Route::get('/', [\App\Http\Controllers\HomeController::class, "index"])->name('home');
-Route::get('/about', [\App\Http\Controllers\AboutController::class, "index"])->name('about');
+Route::get('/', [\App\Http\Controllers\HomeController::class, "index"])
+     ->name('home');
+Route::get('/about', [\App\Http\Controllers\AboutController::class, "index"])
+     ->name('about');
