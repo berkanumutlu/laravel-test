@@ -30,7 +30,9 @@ Route::get('/contact', [\App\Http\Controllers\ContactController::class, "index"]
      ->name('contact');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, "contact_form"]);
 Route::post('/user/{id}/{name}', [\App\Http\Controllers\ContactController::class, "user_form"])
-     ->name('contact_user_form')
+     ->name('contact.user_form')
     //->where("id", "[0-9]+");
      ->where(["id" => "[0-9]+", "name" => "[a-z]+"]);
+Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\ContactController::class, "match_form"])
+     ->name('contact.match_form');
 

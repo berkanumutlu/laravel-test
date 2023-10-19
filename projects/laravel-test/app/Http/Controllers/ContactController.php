@@ -27,4 +27,9 @@ class ContactController extends Controller
         dump($request->name);
         dump($request->all());
     }
+
+    public function match_form(Request $request)
+    {
+        dump($request->all());
+    }
 }
