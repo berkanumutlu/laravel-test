@@ -75,3 +75,16 @@ Route::any('any', function ()
  */
 Route::resource("article", "ArticleController");
 Route::apiResource("/api/article", "Api/ArticleController");
+/*
+ * where, whereNumber, whereAlpha, whereAlphaNumeric, whereUuid, whereUlid, whereIn
+ */
+Route::get("/user/{id}", [\App\Http\Controllers\UserController::class, "show"])
+     ->name('user.show')
+     ->whereNumber("id");
+Route::get("/user/{name}", [\App\Http\Controllers\UserController::class, "show_name"])
+     ->name('user.show_name')
+    //->whereAlpha("name");
+     ->whereAlphaNumeric("name"); // Hem numeric hem karakter gelebilir anlamına geliyor.
+Route::get("/user/check/{role}", [\App\Http\Controllers\UserController::class, "check_role"])
+     ->name('user.check_role')
+     ->whereIn("role", ["admin", "user"]);

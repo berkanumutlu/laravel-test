@@ -24,4 +24,19 @@ class UserController extends Controller
     {
         dump('User #' . $id . ' deleted.');
     }
+
+    public function show(Request $request, $id)
+    {
+        dump('User #' . $id . ' show');
+    }
+
+    public function show_name(Request $request, $name)
+    {
+        dump('User #' . $name . ' show name');
+    }
+
+    public function check_role(Request $request, $role)
+    {
+        dump('User role is ' . $role);
+    }
 }
