@@ -74,7 +74,7 @@ Route::any('any', function ()
  * php artisan make:controller ArticleController --api
  */
 Route::resource("article", "ArticleController");
-Route::apiResource("/api/article", "Api/ArticleController");
+//Route::apiResource("/api/article", "Api/ArticleController");
 /*
  * where, whereNumber, whereAlpha, whereAlphaNumeric, whereUuid, whereUlid, whereIn
  */
@@ -88,3 +88,23 @@ Route::get("/user/{name}", [\App\Http\Controllers\UserController::class, "show_n
 Route::get("/user/check/{role}", [\App\Http\Controllers\UserController::class, "check_role"])
      ->name('user.check_role')
      ->whereIn("role", ["admin", "user"]);
+/*
+ * Prefix => Route değerinin başına ön ek eklemeyi sağlıyor.
+ * Group => Belirli bir route tanımlaarını gruplamayı sağlıyor. Bu gruba name ve prefix ekleyerek grup içerisindeki route tanımlarının hepsine uygulamasını sağlayabiliriz.
+ * Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){ });
+ */
+/*Route::prefix("admin")
+     ->name("admin.")
+     ->group(function ()
+     {
+         Route::get("/article/edit", [\App\Http\Controllers\Admin\ArticleController::class, "edit"])
+              ->name("article.edit");
+         Route::get("/article/{id}/delete", [\App\Http\Controllers\Admin\ArticleController::class, "destroy"])
+              ->name("article.destroy");
+     });*/
+//Route::controller(\App\Http\Controllers\UserController::class)
+//     ->group(function ()
+//     {
+//         Route::get('/get-user', "get_user");
+//         Route::get('/delete-user', "delete_user");
+//     });
