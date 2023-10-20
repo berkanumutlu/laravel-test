@@ -59,3 +59,19 @@ Route::put('user/{id}/update-all', [\App\Http\Controllers\UserController::class,
      ->name('user.update_all');
 Route::delete('user/{id}/delete', [\App\Http\Controllers\UserController::class, "delete"])
      ->name('user.delete');
+/*
+ * Any => Tüm istek türlerini kabul eder.
+ */
+Route::any('any', function ()
+{
+    dump('Route any method');
+});
+/*
+ * Resource => Controller'a ait index, create, store, show, edit, update, destroy route tanımlamalarını ve metotlarını oluşturmayı sağlar.
+ * php artisan make:controller ArticleController --resource
+ *
+ * ApiResource => API Controller'a ait index, store, show, update, destroy route tanımlamalarını ve metotlarını oluşturmayı sağlar.
+ * php artisan make:controller ArticleController --api
+ */
+Route::resource("article", "ArticleController");
+Route::apiResource("/api/article", "Api/ArticleController");
