@@ -8,4 +8,11 @@ use Illuminate\Routing\Controller;
 class BaseController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    protected array $data = [];
+
+    public function __construct()
+    {
+        $this->data['current_language'] = 'tr';
+    }
 }

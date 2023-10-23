@@ -14,6 +14,8 @@ class HomeController extends BaseController
         //return view('web.home.index', compact('name'));
         //return view('web.home.index')->with('name', $name)->with('age', $age);
         //return view('web.home.index')->with(['name' => $name, 'age' => $age]);
-        return view('web.home.index', compact(['person', 'name', 'age']));
+        //return view('web.home.index', compact(['person', 'name', 'age']));
+        $this->data['persona'] = $person;
+        return view('web.home.index', $this->data);
     }
 }
