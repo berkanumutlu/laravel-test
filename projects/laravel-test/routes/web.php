@@ -25,24 +25,24 @@ use Illuminate\Support\Facades\Route;
 /*
  * name => Front tarafında belirtilen isimdeki route'a ulaşmak için kullanılır.
  */
-Route::get('/', [\App\Http\Controllers\HomeController::class, "index"])
+Route::get('/', [\App\Http\Controllers\Web\HomeController::class, "index"])
      ->name('home');
-Route::get('/about', [\App\Http\Controllers\AboutController::class, "index"])
+Route::get('/about', [\App\Http\Controllers\Web\AboutController::class, "index"])
      ->name('about');
-Route::get('/contact', [\App\Http\Controllers\ContactController::class, "index"])
+Route::get('/contact', [\App\Http\Controllers\Web\ContactController::class, "index"])
      ->name('contact');
-Route::post('/contact', [\App\Http\Controllers\ContactController::class, "contact_form"]);
+Route::post('/contact', [\App\Http\Controllers\Web\ContactController::class, "contact_form"]);
 /*
  * where => URL'deki parametrelere belirli koşullar atamak için kullanılır.
  */
-Route::post('/contact/user/{id}/{name}', [\App\Http\Controllers\ContactController::class, "user_form"])
+Route::post('/contact/user/{id}/{name}', [\App\Http\Controllers\Web\ContactController::class, "user_form"])
      ->name('contact.user_form')
     //->where("id", "[0-9]+");
      ->where(["id" => "[0-9]+", "name" => "[a-z]+"]);
 /*
  * Match => Bir adrese birden fazla metotlarla(get, post) ulaşmak için kullanılır.
  */
-Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\ContactController::class, "match_form"])
+Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\Web\ContactController::class, "match_form"])
      ->name('contact.match_form');
 /*
  * Patch => Kullanıcıya ait sadece tek bir veriyi güncellemek için kullanılır. Örneğin sadece kullanıcı adı
@@ -51,13 +51,13 @@ Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\ContactContr
  *
  * Delete => Kullanıcıyı, veriyi silmek için kullanılır.
  */
-Route::get('user', [\App\Http\Controllers\UserController::class, "index"])
+Route::get('user', [\App\Http\Controllers\Web\UserController::class, "index"])
      ->name('user');
-Route::patch('user/{id}/update', [\App\Http\Controllers\UserController::class, "update"])
+Route::patch('user/{id}/update', [\App\Http\Controllers\Web\UserController::class, "update"])
      ->name('user.update');
-Route::put('user/{id}/update-all', [\App\Http\Controllers\UserController::class, "update_all"])
+Route::put('user/{id}/update-all', [\App\Http\Controllers\Web\UserController::class, "update_all"])
      ->name('user.update_all');
-Route::delete('user/{id}/delete', [\App\Http\Controllers\UserController::class, "delete"])
+Route::delete('user/{id}/delete', [\App\Http\Controllers\Web\UserController::class, "delete"])
      ->name('user.delete');
 /*
  * Any => Tüm istek türlerini kabul eder.
@@ -78,14 +78,14 @@ Route::resource("article", "ArticleController");
 /*
  * where, whereNumber, whereAlpha, whereAlphaNumeric, whereUuid, whereUlid, whereIn
  */
-Route::get("/user/{id}", [\App\Http\Controllers\UserController::class, "show"])
+Route::get("/user/{id}", [\App\Http\Controllers\Web\UserController::class, "show"])
      ->name('user.show')
      ->whereNumber("id");
-Route::get("/user/{name}", [\App\Http\Controllers\UserController::class, "show_name"])
+Route::get("/user/{name}", [\App\Http\Controllers\Web\UserController::class, "show_name"])
      ->name('user.show_name')
     //->whereAlpha("name");
      ->whereAlphaNumeric("name"); // Hem numeric hem karakter gelebilir anlamına geliyor.
-Route::get("/user/check/{role}", [\App\Http\Controllers\UserController::class, "check_role"])
+Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::class, "check_role"])
      ->name('user.check_role')
      ->whereIn("role", ["admin", "user"]);
 /*

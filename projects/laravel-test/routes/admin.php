@@ -12,10 +12,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "admin" middleware group. Make something great!
 |
 */
-Route::get('/', function ()
-{
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, "index"]);
 Route::get("article/edit", [\App\Http\Controllers\Admin\ArticleController::class, "edit"])
      ->name("article.edit");
 Route::get("article/{id}/delete", [\App\Http\Controllers\Admin\ArticleController::class, "destroy"])

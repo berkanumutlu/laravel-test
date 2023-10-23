@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-class AboutController extends Controller
+class AboutController extends BaseController
 {
     public function index()
     {

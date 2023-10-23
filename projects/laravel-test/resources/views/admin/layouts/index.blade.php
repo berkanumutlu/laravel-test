@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/bootstrap.min.css') }}">
     @yield("head")
 </head>
-<body>
+<body class="antialiased">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">{{ Request::route()->getPrefix() }}</a>
