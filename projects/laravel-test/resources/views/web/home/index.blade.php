@@ -30,6 +30,16 @@
             </p>
         @endif
     @endif
+    <hr>
+    <h6>Custom Directive</h6>
+    <form action="" method="POST">
+        @csrf
+        @method("DELETE")
+        @customMethod("berkan")
+        <input type="text" name="fullname">
+        <button type="submit">Send</button>
+    </form>
+    <hr>
 @endsection
 @section("scripts")
 
