@@ -108,3 +108,5 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
 //         Route::get('/get-user', "get_user");
 //         Route::get('/delete-user', "delete_user");
 //     });
+Route::get('/article', [\App\Http\Controllers\Web\ArticleController::class, "index"])
+     ->name('article');

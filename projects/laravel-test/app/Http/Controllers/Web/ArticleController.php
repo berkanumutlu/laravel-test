@@ -1,4 +1,5 @@
 <?php
+// php artisan make:controller Web/HomeController --resource
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ class ArticleController extends BaseController
      */
     public function index()
     {
-        dump("article index");
+        //dump("article index");
+        return view('web.article.index');
     }
 
     /**

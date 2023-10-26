@@ -1,4 +1,5 @@
 <?php
+// php artisan make:controller Web/HomeController
 namespace App\Http\Controllers\Web;
 
 class HomeController extends BaseController

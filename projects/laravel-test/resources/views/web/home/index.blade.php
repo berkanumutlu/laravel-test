@@ -40,6 +40,12 @@
         <button type="submit">Send</button>
     </form>
     <hr>
+    <x-input-text :type="'text'" :id="'fullname'" :name="'fullname'" :class="'form-control'" :label="'Ad Soyad'" :placelholder="'Ad Soyad'"/>
+    @php
+        $color = "info";
+    @endphp
+    <x-input-text2 :type="'text'" :name="'fullname2'" class="bg-" :color="$color" :error="false"/>
+    <hr>
 @endsection
 @section("scripts")
 

@@ -26,6 +26,9 @@
                     <a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">About Us</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ Route::is('article') ? 'active' : '' }}" href="{{ route('article') }}">Article</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ Route::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
                 </li>
                 <li class="nav-item">
