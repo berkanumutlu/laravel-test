@@ -1,4 +1,4 @@
-{{--php artisan make:component FormInput--}}
+{{--php artisan make:component InputText--}}
 @if(isset($id) && isset($label))
     <label for="{{ $id }}">{{ $label }}</label>
 @endif
