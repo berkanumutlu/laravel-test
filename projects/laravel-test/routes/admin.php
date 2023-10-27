@@ -17,3 +17,5 @@ Route::get("article/edit", [\App\Http\Controllers\Admin\ArticleController::class
      ->name("article.edit");
 Route::get("article/{id}/delete", [\App\Http\Controllers\Admin\ArticleController::class, "destroy"])
      ->name("article.destroy");
+Route::get("article/create", [\App\Http\Controllers\Admin\ArticleController::class, "create"])
+     ->name("article.create");

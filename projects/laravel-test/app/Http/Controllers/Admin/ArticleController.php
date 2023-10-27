@@ -18,7 +18,7 @@ class ArticleController extends BaseController
      */
     public function create()
     {
-        //
+        return view('admin.article.create');
     }
 
     /**
