@@ -8,7 +8,6 @@
 // php artisan migrate:reset // migrations tablosunu hariç tüm tabloları kaldırır.
 // php artisan migrate:refresh // Tüm tabloları kaldırıp tekrar migrate eder.
 // php artisan migrate:fresh // Tüm tabloları kaldırır (Migrations tablosu dahil) ve tekrar migrate eder. (Id'ler sıfırlanır.)
-//php artisan make:migration add_column_articles_table --table=articles
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

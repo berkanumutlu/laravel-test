@@ -1,5 +1,5 @@
 <?php
-
+// php artisan make:migration add_column_articles_table --table=articles
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +20,7 @@ return new class extends Migration
                   ->onDelete('cascade');
             // FK kaldırmak için kullanılıyor.
             //$table->dropForeign('articles_category_id_foreign');
-            // Tablodaki bir field adını değiştirme işlemi
+            // Tablodaki bir alan adını değiştirme işlemi
             // php artisan make:migration rename_status_to_is_active_articles_table --table=articles
             //$table->renameColumn('status', 'is_active'); // MYSQL 8.0'dan sonra çalışıyor. Önceki sürümler için alttaki kod kullanılabilir.
             //\Illuminate\Support\Facades\DB::statement("ALTER TABLE articles CHANGE COLUMN status is_active tinyint not null");
