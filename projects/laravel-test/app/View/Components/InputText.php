@@ -1,7 +1,7 @@
 <?php
 /**
  * php artisan make:component InputText
- * php artisan make:component InputText --view => Sadece componentin view dosyasını oluşturur.
+ * php artisan make:component InputText --view ===> Sadece componentin view dosyasını oluşturur.
  */
 namespace App\View\Components;
 

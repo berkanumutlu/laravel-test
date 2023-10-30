@@ -16,8 +16,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
     /*
-     * Route::get('/', "HomeController@index"); şeklinde kullanımı sağlamak için
-     * namespace tanımı yaparak boot::routes içerisinde namespace'i set etmek gerekiyor.
+     * Route::get('/', "HomeController@index"); ===> şeklinde kullanımı sağlamak için namespace tanımı yaparak boot::routes içerisinde namespace'i set etmek gerekiyor.
      */
     protected $namespace = "\\App\\Http\\Controllers";
     protected $namespace_admin = "\\App\\Http\\Controllers\\Admin";

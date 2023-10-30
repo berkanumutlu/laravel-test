@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', "HomeController@index");
 //Route::get('/', function () { return view('web.home.index'); })->name('home');
 /*
- * name => Front tarafında belirtilen isimdeki route'a ulaşmak için kullanılır.
+ * name ===> Front tarafında belirtilen isimdeki route'a ulaşmak için kullanılır.
  */
 Route::get('/', [\App\Http\Controllers\Web\HomeController::class, "index"])
      ->name('home');
@@ -33,23 +33,23 @@ Route::get('/contact', [\App\Http\Controllers\Web\ContactController::class, "ind
      ->name('contact');
 Route::post('/contact', [\App\Http\Controllers\Web\ContactController::class, "contact_form"]);
 /*
- * where => URL'deki parametrelere belirli koşullar atamak için kullanılır.
+ * where ===> URL'deki parametrelere belirli koşullar atamak için kullanılır.
  */
 Route::post('/contact/user/{id}/{name}', [\App\Http\Controllers\Web\ContactController::class, "user_form"])
      ->name('contact.user_form')
     //->where("id", "[0-9]+");
      ->where(["id" => "[0-9]+", "name" => "[a-z]+"]);
 /*
- * Match => Bir adrese birden fazla metotlarla(get, post) ulaşmak için kullanılır.
+ * Match ===> Bir adrese birden fazla metotlarla(get, post) ulaşmak için kullanılır.
  */
 Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\Web\ContactController::class, "match_form"])
      ->name('contact.match_form');
 /*
- * Patch => Kullanıcıya ait sadece tek bir veriyi güncellemek için kullanılır. Örneğin sadece kullanıcı adı
+ * Patch ===> Kullanıcıya ait sadece tek bir veriyi güncellemek için kullanılır. Örneğin sadece kullanıcı adı
  *
- * Put => Kullanıcıya ait tüm bilgileri güncellemek için kullanılır.
+ * Put ===> Kullanıcıya ait tüm bilgileri güncellemek için kullanılır.
  *
- * Delete => Kullanıcıyı, veriyi silmek için kullanılır.
+ * Delete ===> Kullanıcıyı, veriyi silmek için kullanılır.
  */
 Route::get('user', [\App\Http\Controllers\Web\UserController::class, "index"])
      ->name('user');
@@ -60,17 +60,17 @@ Route::put('user/{id}/update-all', [\App\Http\Controllers\Web\UserController::cl
 Route::delete('user/{id}/delete', [\App\Http\Controllers\Web\UserController::class, "delete"])
      ->name('user.delete');
 /*
- * Any => Tüm istek türlerini kabul eder.
+ * Any ===> Tüm istek türlerini kabul eder.
  */
 Route::any('any', function ()
 {
     dump('Route any method');
 });
 /*
- * Resource => Controller'a ait index, create, store, show, edit, update, destroy route tanımlamalarını ve metotlarını oluşturmayı sağlar.
+ * Resource ===> Controller'a ait index, create, store, show, edit, update, destroy route tanımlamalarını ve metotlarını oluşturmayı sağlar.
  * php artisan make:controller ArticleController --resource
  *
- * ApiResource => API Controller'a ait index, store, show, update, destroy route tanımlamalarını ve metotlarını oluşturmayı sağlar.
+ * ApiResource ===> API Controller'a ait index, store, show, update, destroy route tanımlamalarını ve metotlarını oluşturmayı sağlar.
  * php artisan make:controller ArticleController --api
  */
 Route::resource("article", "ArticleController");
@@ -89,9 +89,9 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
      ->name('user.check_role')
      ->whereIn("role", ["admin", "user"]);
 /*
- * Prefix => Route değerinin başına ön ek eklemeyi sağlıyor.
+ * Prefix ===> Route değerinin başına ön ek eklemeyi sağlıyor.
  *
- * Group => Belirli bir route tanımlamalarını gruplamayı sağlıyor. Bu gruba name ve prefix ekleyerek grup içerisindeki route tanımlarının hepsine uygulamasını sağlayabiliriz.
+ * Group ===> Belirli bir route tanımlamalarını gruplamayı sağlıyor. Bu gruba name ve prefix ekleyerek grup içerisindeki route tanımlarının hepsine uygulamasını sağlayabiliriz.
  * Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){ });
  */
 /*Route::prefix("admin")
