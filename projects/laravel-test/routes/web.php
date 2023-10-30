@@ -90,7 +90,8 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
      ->whereIn("role", ["admin", "user"]);
 /*
  * Prefix => Route değerinin başına ön ek eklemeyi sağlıyor.
- * Group => Belirli bir route tanımlaarını gruplamayı sağlıyor. Bu gruba name ve prefix ekleyerek grup içerisindeki route tanımlarının hepsine uygulamasını sağlayabiliriz.
+ *
+ * Group => Belirli bir route tanımlamalarını gruplamayı sağlıyor. Bu gruba name ve prefix ekleyerek grup içerisindeki route tanımlarının hepsine uygulamasını sağlayabiliriz.
  * Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){ });
  */
 /*Route::prefix("admin")
@@ -102,11 +103,11 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
          Route::get("/article/{id}/delete", [\App\Http\Controllers\Admin\ArticleController::class, "destroy"])
               ->name("article.destroy");
      });*/
-//Route::controller(\App\Http\Controllers\UserController::class)
-//     ->group(function ()
-//     {
-//         Route::get('/get-user', "get_user");
-//         Route::get('/delete-user', "delete_user");
-//     });
+/*Route::controller(\App\Http\Controllers\UserController::class)
+     ->group(function ()
+     {
+         Route::get('/get-user', "get_user");
+         Route::get('/delete-user', "delete_user");
+     });*/
 Route::get('/article', [\App\Http\Controllers\Web\ArticleController::class, "index"])
      ->name('article');

@@ -1,4 +1,8 @@
 <?php
+/**
+ * php artisan make:component InputText
+ * php artisan make:component InputText --view => Sadece componentin view dosyasını oluşturur.
+ */
 namespace App\View\Components;
 
 use Closure;
@@ -14,7 +18,10 @@ class InputText extends Component
      */
     public function __construct(public ?string $type = null, public ?string $name = null, public ?string $class = null, public ?string $id = null, public ?string $label = null, public ?string $placeholder = null)
     {
-        //$this->>type = $type;// PHP 8 öncesi için bu şekilde set edilmesi gerekiyor. PHP 8 ile parametreyi public yapmak yeterli oluyor.
+        /*
+         * PHP 8 öncesi için bu şekilde set edilmesi gerekiyor. PHP 8 ile parametreyi public yapmak yeterli oluyor.
+         */
+        //$this->>type = $type;
     }
 
     /**

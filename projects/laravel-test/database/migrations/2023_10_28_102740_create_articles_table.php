@@ -27,6 +27,9 @@ return new class extends Migration
             $table->string('slug_name');
             $table->timestamps(); // created_at, updated_at
 
+            /*
+             * env içerisinde db karakteri türü set edilerek aşağıdaki kod tekrarına gerek kalmaz.
+             */
             //$table->charset = "utf8";
             //$table->collation = "utf8_general_ci";
         });
