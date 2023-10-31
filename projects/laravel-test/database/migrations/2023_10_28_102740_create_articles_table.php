@@ -17,6 +17,8 @@
  * php artisan migrate:refresh ===> Tüm tabloları kaldırıp tekrar migrate eder.
  *
  * php artisan migrate:fresh ===> Tüm tabloları kaldırır (Migrations tablosu dahil) ve tekrar migrate eder. (Id'ler sıfırlanır.)
+ *
+ * php artisan migrate:refresh --path=database/migrations/2023_10_28_102740_create_articles_table.php ===> Sadece belirtilen dosyayı migrate eder.
  */
 
 use Illuminate\Database\Migrations\Migration;
