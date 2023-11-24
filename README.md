@@ -10,6 +10,8 @@
 
 # Laravel Test Project
 
+It is a project where document information about Laravel is used with simple examples.
+
 # Installation
 
 ```sh

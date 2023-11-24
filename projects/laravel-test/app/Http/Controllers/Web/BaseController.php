@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -13,6 +14,6 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        $this->data['current_language'] = 'tr';
+        $this->data['current_language'] = app()->getLocale();
     }
 }
