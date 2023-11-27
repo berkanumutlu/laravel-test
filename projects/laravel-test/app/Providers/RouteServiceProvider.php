@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
@@ -18,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
     /*
      * Route::get('/', "HomeController@index"); ===> şeklinde kullanımı sağlamak için namespace tanımı yaparak boot::routes içerisinde namespace'i set etmek gerekiyor.
      */
-    protected $namespace = "\\App\\Http\\Controllers";
+    protected $namespace = "\\App\\Http\\Controllers\\Web";
     protected $namespace_admin = "\\App\\Http\\Controllers\\Admin";
 
     /**
@@ -26,24 +27,22 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        RateLimiter::for('api', function (Request $request)
-        {
+        RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)
-                        ->by($request->user()?->id ?: $request->ip());
+                ->by($request->user()?->id ?: $request->ip());
         });
-        $this->routes(function ()
-        {
+        $this->routes(function () {
             Route::middleware('api')
-                 ->prefix('api')
-                 ->group(base_path('routes/api.php'));
+                ->prefix('api')
+                ->group(base_path('routes/api.php'));
             Route::middleware('web')
-                 ->namespace($this->namespace)
-                 ->group(base_path('routes/web.php'));
+                ->namespace($this->namespace)
+                ->group(base_path('routes/web.php'));
             Route::middleware('admin')
-                 ->prefix('admin')
-                 ->name('admin.')
-                 ->namespace($this->namespace_admin)
-                 ->group(base_path('routes/admin.php'));
+                ->prefix('admin')
+                ->name('admin.')
+                ->namespace($this->namespace_admin)
+                ->group(base_path('routes/admin.php'));
         });
     }
 }

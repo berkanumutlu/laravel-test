@@ -15,5 +15,6 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->data['current_language'] = app()->getLocale();
+        $this->data['title'] = 'Laravel';
     }
 }

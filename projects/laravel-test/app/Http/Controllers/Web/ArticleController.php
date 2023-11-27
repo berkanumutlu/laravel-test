@@ -2,6 +2,7 @@
 // php artisan make:controller Web/HomeController --resource
 namespace App\Http\Controllers\Web;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends BaseController
@@ -11,8 +12,9 @@ class ArticleController extends BaseController
      */
     public function index()
     {
-        //dump("article index");
-        return view('web.article.index');
+        $this->data['article_list'] = Article::query()->select(['id', 'title', 'slug_name', 'body'])->get();
+        $this->data['title'] = 'Article List';
+        return view('web.article.index', $this->data);
     }
 
     /**
@@ -36,7 +38,7 @@ class ArticleController extends BaseController
      */
     public function show(string $id)
     {
-        dump("article show - " . $id);
+        dump("article show - ".$id);
     }
 
     /**
@@ -44,7 +46,7 @@ class ArticleController extends BaseController
      */
     public function edit(string $id)
     {
-        dump("article edit - " . $id);
+        dump("article edit - ".$id);
     }
 
     /**
@@ -52,7 +54,7 @@ class ArticleController extends BaseController
      */
     public function update(Request $request, string $id)
     {
-        dump("article updated - " . $id);
+        dump("article updated - ".$id);
     }
 
     /**
@@ -60,6 +62,6 @@ class ArticleController extends BaseController
      */
     public function destroy(string $id)
     {
-        dump("article deleted - " . $id);
+        dump("article deleted - ".$id);
     }
 }
