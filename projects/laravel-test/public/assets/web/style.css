@@ -17,3 +17,7 @@ footer {
     background-color: var(--color-white);
     border-top: 1px solid var(--color-gray1);
 }
+
+.pagination {
+    margin-bottom: 0;
+}

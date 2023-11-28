@@ -5,7 +5,7 @@
 **/.idea_modules/
 **/.buildpath
 **/.project
-**/vendor
+laravel-test/vendor
 
 # Other paths
 **/.vagrant/

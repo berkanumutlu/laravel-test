@@ -31,18 +31,17 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table)
-        {
+        Schema::create('articles', function (Blueprint $table) {
             $table->id('Id');
             $table->string('title', 80);
             $table->text('body');
-            $table->tinyInteger('status')
-                  ->default(0);
+            $table->tinyInteger('status')->default(0);
             $table->string('slug_name');
             $table->timestamps(); // created_at, updated_at
             /*
              * env içerisinde db karakteri türü set edilerek aşağıdaki kod tekrarına gerek kalmaz.
-             */ //$table->charset = "utf8";
+             */
+            //$table->charset = "utf8";
             //$table->collation = "utf8_general_ci";
         });
     }

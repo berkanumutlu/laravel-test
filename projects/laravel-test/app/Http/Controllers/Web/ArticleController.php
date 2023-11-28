@@ -12,7 +12,9 @@ class ArticleController extends BaseController
      */
     public function index()
     {
-        $this->data['article_list'] = Article::query()->select(['id', 'title', 'slug_name', 'body'])->get();
+        $this->data['records'] = Article::query()->select([
+            'id', 'title', 'slug_name', 'body'
+        ])->orderBy('created_at')->paginate(6);
         $this->data['title'] = 'Article List';
         return view('web.article.index', $this->data);
     }
