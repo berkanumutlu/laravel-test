@@ -110,3 +110,5 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
      });*/
 /*Route::get('/article', [\App\Http\Controllers\Web\ArticleController::class, "index"])
      ->name('article');*/
+Route::get('login', [\App\Http\Controllers\Web\LoginController::class, "index"])->name('login');
+Route::post('login', [\App\Http\Controllers\Web\LoginController::class, "login"]);

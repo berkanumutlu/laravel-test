@@ -41,6 +41,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('user') ? 'active' : '' }}" href="{{ route('user') }}">User</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('login') ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false"> Dropdown </a>
@@ -67,7 +70,7 @@
 <div class="content">
     @yield("content")
 </div>
-<footer class="container-fluid">
+<footer class="container-fluid bg-light">
     <div class="container text-center">
         <p class="mb-0">Copyright © 2023 Berkan Ümütlü. All Right Reserved.</p>
     </div>
