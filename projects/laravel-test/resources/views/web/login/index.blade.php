@@ -11,9 +11,10 @@
             </div>
             <div class="col-12">
                 @if($is_logged_in)
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column align-items-center">
                         <p class="mb-0 fs-3">You're logged as <strong>{{ auth()->guard('web')->user()->name }}</strong>
                         </p>
+                        <a href="{{ route('logout') }}">Log out</a>
                     </div>
                 @else
                     <form action="{{ route('login') }}" method="POST" style="margin: 0 auto;max-width: 50%;">

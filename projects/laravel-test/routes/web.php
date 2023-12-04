@@ -112,3 +112,4 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
      ->name('article');*/
 Route::get('login', [\App\Http\Controllers\Web\LoginController::class, "index"])->name('login');
 Route::post('login', [\App\Http\Controllers\Web\LoginController::class, "login"]);
+Route::get('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"])->name('logout');
