@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 //use App\Models\Admin;
 use App\Http\Requests\Admin\LoginRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 //use App\Models\Admin;
@@ -75,5 +76,23 @@ class LoginController extends BaseController
         return redirect()->route('admin.login.index')->withErrors([
             "email" => "Email or password is incorrect."
         ])->onlyInput("email", "remember_me");
+    }
+
+    public function logout(Request $request)
+    {
+        $result = ['status' => false, 'message' => null];
+        if (Auth::guard('admin')->check()) {
+            try {
+                Auth::guard('admin')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerate();
+                $result['status'] = true;
+                $result['redirect'] = route('admin.login.index');
+            } catch (\Exception $e) {
+                $result['message'] = $e->getMessage();
+            }
+        }
+        //return redirect()->route('admin.login.index');
+        return response()->json($result);
     }
 }

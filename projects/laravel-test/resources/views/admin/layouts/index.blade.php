@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Berkan Ümütlü">
+    <meta name="csrf_token" content="{{ csrf_token() }}"/>
     <title>{{ isset($title) ? $title. ' - Admin Panel' : 'Admin Panel - Laravel Test' }}</title>
     <link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon ?? '' }}"/>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon ?? '' }}"/>
@@ -21,7 +22,8 @@
 <body class="antialiased">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">{{ 'Admin/'. (auth()->guard('admin')->user()->name ?? '') }}</a>
+        <a class="navbar-brand"
+           href="{{ route('admin.home') }}">{{ 'Admin/'. (auth()->guard('admin')->user()->name ?? '') }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,6 +44,11 @@
                     <a class="nav-link {{ Route::is('admin.article.edit') ? 'active' : '' }}"
                        href="{{ route('admin.article.edit', ['id' => 1]) }}">Edit Article #1</a>
                 </li>
+                @if(Auth::guard('admin')->check())
+                    <li class="nav-item">
+                        <a class="nav-link btnUserLogout" href="{{ route('admin.logout', ['id' => 1]) }}">Logout</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('user') ? 'active' : '' }}" href="{{ route('user') }}">User</a>
                 </li>
@@ -75,6 +82,7 @@
 <script src="{{ asset('assets/plugins/jquery/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap/umd_popper.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/main.js') }}"></script>
 @yield("scripts")
 </body>
 </html>
