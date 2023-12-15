@@ -12,10 +12,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "admin" middleware group. Make something great!
 |
 */
-Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, "index"]);
-Route::get("article/edit", [\App\Http\Controllers\Admin\ArticleController::class, "edit"])
-     ->name("article.edit");
-Route::get("article/{id}/delete", [\App\Http\Controllers\Admin\ArticleController::class, "destroy"])
-     ->name("article.destroy");
-Route::get("article/create", [\App\Http\Controllers\Admin\ArticleController::class, "create"])
-     ->name("article.create");
+Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, "index"])->name('home');
+Route::prefix("login")->name("login.")->controller('LoginController')
+    ->middleware('guest:admin')
+    ->withoutMiddleware(['auth:admin'])
+    ->group(function () {
+        Route::get('', "index")->name('index');
+        Route::post('', "login");
+    });
+Route::prefix("article")->name("article.")->controller('ArticleController')
+    ->group(function () {
+        Route::get("add", "create")->name("add");
+        Route::get('edit/{id}', "edit")->whereNumber('id')->name('edit');
+        Route::get("delete/{id}", "destroy")->whereNumber('id')->name("delete");
+    });
