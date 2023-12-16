@@ -1,5 +1,5 @@
 @extends("web.layouts.index")
-@section("head")
+@section("style")
 
 @endsection
 @section("content")
@@ -40,7 +40,8 @@
         <button type="submit">Send</button>
     </form>
     <hr>
-    <x-input-text :type="'text'" :id="'fullname'" :name="'fullname'" :class="'form-control'" :label="'Ad Soyad'" :placelholder="'Ad Soyad'"/>
+    <x-input-text :type="'text'" :id="'fullname'" :name="'fullname'" :class="'form-control'" :label="'Ad Soyad'"
+                  :placelholder="'Ad Soyad'"/>
     @php
         $color = "info";
     @endphp

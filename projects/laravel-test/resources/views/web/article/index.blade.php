@@ -1,5 +1,5 @@
 @extends("web.layouts.index")
-@section("head")
+@section("style")
 
 @endsection
 @section("content")
