@@ -81,6 +81,7 @@
 <script src="{{ asset('assets/plugins/jquery/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap/umd_popper.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap/bootstrap.min.js') }}"></script>
+@include('sweetalert::alert')
 @yield("scripts")
 </body>
 </html>

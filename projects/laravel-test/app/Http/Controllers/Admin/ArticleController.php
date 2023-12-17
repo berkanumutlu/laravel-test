@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends BaseController
 {
@@ -26,7 +29,17 @@ class ArticleController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|min:3',
+            'body'  => 'required|min:3'
+        ]);
+        if ($validator->fails()) {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+        $article = Article::create($request->all());
+        return redirect('admin.article.create')->with('success', 'Article Created Successfully!');
+        // OR
+        return redirect('admin.article.create')->withSuccess('Article Created Successfully!');
     }
 
     /**
@@ -42,7 +55,7 @@ class ArticleController extends BaseController
      */
     public function edit(string $id = null)
     {
-        dump("admin article edit #" . $id);
+        dump("admin article edit #".$id);
         return view("admin.article.edit");
     }
 
@@ -59,6 +72,6 @@ class ArticleController extends BaseController
      */
     public function destroy(string $id)
     {
-        dump("admin article deleted #" . $id);
+        dump("admin article deleted #".$id);
     }
 }
