@@ -1,3 +1,18 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+    padding: 32px 0;
+    color: #fff;
+    background-color: #213343;
+    text-align: center;
+    border-top: 2px solid #7691ad;
+}
+
 /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
 *, ::after, ::before {
     box-sizing: border-box;

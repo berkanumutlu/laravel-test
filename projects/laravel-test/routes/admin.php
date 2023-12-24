@@ -25,5 +25,6 @@ Route::prefix("article")->name("article.")->controller('ArticleController')
     ->group(function () {
         Route::get("add", "create")->name("add");
         Route::get('edit/{id}', "edit")->whereNumber('id')->name('edit');
+        Route::post('edit/{id}', "update")->whereNumber('id');
         Route::get("delete/{id}", "destroy")->whereNumber('id')->name("delete");
     });

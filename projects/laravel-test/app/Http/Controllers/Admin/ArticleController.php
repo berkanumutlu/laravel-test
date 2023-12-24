@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\ArticleUpdateRequest;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ArticleController extends BaseController
 {
@@ -55,16 +58,40 @@ class ArticleController extends BaseController
      */
     public function edit(string $id = null)
     {
-        dump("admin article edit #".$id);
-        return view("admin.article.edit");
+        $record = Article::query()->select(['title', 'body', 'category_id', 'is_active', 'slug_name'])
+            ->where('id', $id)->first();
+        if (is_null($record)) {
+            alert()->error("Error", "Article not found.")->showConfirmButton("OK");
+            return redirect()->route('admin.article.index');
+        }
+        $this->data['record'] = $record;
+        $this->data['category_list'] = Category::where('status', 1)->select(['id', 'name'])
+            ->orderBy('name', 'asc')->get();
+        $this->data['title'] = 'Article Edit #'.$id;
+        return view("admin.article.edit", $this->data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleUpdateRequest $request, string $id)
     {
-        //
+        $slug = !empty($request->slug_name) ? Str::slug($request->slug_name) : Str::slug($request->title);
+        $data = [
+            'title'       => trim($request->title),
+            'slug_name'   => $slug,
+            'body'        => $request->body,
+            'category_id' => $request->category_id ?? null,
+            'is_active'   => isset($request->is_active) ? 1 : 0
+        ];
+        try {
+            Article::query()->where('id', $id)->update($data);
+        } catch (\Exception $e) {
+            alert()->error("Error", "Record could not be updated.")->showConfirmButton("OK");
+            return redirect()->back()->exceptInput("_token", "files", "image");
+        }
+        alert()->success("Success", "Record has been updated successfully.")->showConfirmButton("OK")->autoClose(5000);
+        return redirect()->back()->exceptInput("_token", "files", "image");
     }
 
     /**

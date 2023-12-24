@@ -15,7 +15,7 @@ return new class extends Migration
             /*
              * Tabloya FK (Foreign Key) ekleme işlemi
              */
-            $table->unsignedBigInteger('category_id')->after('body');
+            $table->unsignedBigInteger('category_id')->nullable()->after('body');
             $table->foreign('category_id')
                   ->references('id')
                   ->on('categories')

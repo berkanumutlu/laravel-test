@@ -49,9 +49,6 @@
                         <a class="nav-link btnUserLogout" href="{{ route('admin.logout', ['id' => 1]) }}">Logout</a>
                     </li>
                 @endif
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('user') ? 'active' : '' }}" href="{{ route('user') }}">User</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false"> Dropdown </a>
@@ -76,12 +73,11 @@
     </div>
 </nav>
 @yield("content")
-<footer>
-    Admin Footer
-</footer>
+<footer>Admin Footer</footer>
 <script src="{{ asset('assets/plugins/jquery/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap/umd_popper.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap/bootstrap.min.js') }}"></script>
+@include('sweetalert::alert')
 <script src="{{ asset('assets/admin/js/main.js') }}"></script>
 @yield("scripts")
 </body>
