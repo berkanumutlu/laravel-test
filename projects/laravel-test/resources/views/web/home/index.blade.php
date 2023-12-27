@@ -42,6 +42,7 @@
     <hr>
     <x-input-text :type="'text'" :id="'fullname'" :name="'fullname'" :class="'form-control'" :label="'Ad Soyad'"
                   :placelholder="'Ad Soyad'"/>
+    <hr>
     @php
         $color = "info";
     @endphp
