@@ -168,7 +168,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        RealRashid\SweetAlert\SweetAlertServiceProvider::class
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class
     ])->toArray(),
 
     /*
@@ -184,7 +185,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'Alert' => RealRashid\SweetAlert\Facades\Alert::class
+        'Alert'    => RealRashid\SweetAlert\Facades\Alert::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class
     ])->toArray(),
 
 ];
