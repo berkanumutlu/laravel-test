@@ -40,6 +40,14 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
     ];
+
+    public function getImageAttribute($value): string
+    {
+        if (empty($value)) {
+            return asset('assets/web/images/avatar.png');
+        }
+        return $value;
+    }
 }
