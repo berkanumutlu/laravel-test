@@ -24,9 +24,9 @@ class LoginController extends Controller
 {
     public function index()
     {
-        $this->data['is_logged_in'] = Auth::guard('web')->check();
-        $this->data['title'] = 'Login';
-        return view('web.login.index', $this->data);
+        $is_logged_in = Auth::guard('web')->check();
+        $title = 'Login';
+        return view('web.login.index', compact(['title', 'is_logged_in']));
     }
 
     public function login(LoginRequest $request)

@@ -19,8 +19,6 @@ class HomeController extends Controller
         //return view('web.home.index')->with('name', $name)->with('age', $age);
         //return view('web.home.index')->with(['name' => $name, 'age' => $age]);
         return view('web.home.index', compact(['person', 'name', 'age']));
-        //$this->data['persona'] = $person;
-        //return view('web.home.index', $this->data);
         //Debugbar::stopMeasure('render');
     }
 }

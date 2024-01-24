@@ -20,11 +20,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $this->data['records'] = Article::query()->select([
+        $records = Article::query()->select([
             'id', 'title', 'slug_name', 'body'
         ])->orderBy('created_at')->paginate(6);
-        $this->data['title'] = 'Article List';
-        return view('web.article.index', $this->data);
+        $title = 'Article List';
+        return view('web.article.index', compact(['title', 'records']));
     }
 
     /**
