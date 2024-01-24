@@ -5,9 +5,12 @@
  * php artisan make:model Category --controller -m --factory(-f) --seeder(-s) --policy(-p)
  * php artisan make:model Category --controller -mfs
  */
+
 namespace app\Http\Controllers\Web;
 
-class CategoryController extends BaseController
+use App\Http\Controllers\Controller;
+
+class CategoryController extends Controller
 {
     //
 }

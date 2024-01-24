@@ -2,10 +2,13 @@
 // php artisan make:controller Web/HomeController
 namespace App\Http\Controllers\Web;
 
-class HomeController extends BaseController
+use App\Http\Controllers\Controller;
+
+class HomeController extends Controller
 {
     public function index()
     {
+        //Debugbar::startMeasure('render', 'Time for HomeController rendering');
         $name = 'berkan';
         $age = 25;
         $person = new \stdClass();
@@ -18,5 +21,6 @@ class HomeController extends BaseController
         return view('web.home.index', compact(['person', 'name', 'age']));
         //$this->data['persona'] = $person;
         //return view('web.home.index', $this->data);
+        //Debugbar::stopMeasure('render');
     }
 }

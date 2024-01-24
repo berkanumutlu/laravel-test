@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserController extends BaseController
+class UserController extends Controller
 {
     public function index()
     {
@@ -22,21 +24,21 @@ class UserController extends BaseController
 
     public function delete($id)
     {
-        dump('User #' . $id . ' deleted.');
+        dump('User #'.$id.' deleted.');
     }
 
     public function show(Request $request, $id)
     {
-        dump('User #' . $id . ' show');
+        dump('User #'.$id.' show');
     }
 
     public function show_name(Request $request, $name)
     {
-        dump('User #' . $name . ' show name');
+        dump('User #'.$name.' show name');
     }
 
     public function check_role(Request $request, $role)
     {
-        dump('User role is ' . $role);
+        dump('User role is '.$role);
     }
 }
