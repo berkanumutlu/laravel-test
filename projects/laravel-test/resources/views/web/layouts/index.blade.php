@@ -32,8 +32,8 @@
                         Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('articles.index') ? 'active' : '' }}"
-                       href="{{ route('articles.index') }}">Articles</a>
+                    <a class="nav-link {{ Route::is('article.index') ? 'active' : '' }}"
+                       href="{{ route('article.index') }}">Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('contact') ? 'active' : '' }}"

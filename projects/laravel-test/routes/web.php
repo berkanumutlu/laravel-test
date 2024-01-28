@@ -72,8 +72,12 @@ Route::any('any', function () {
  * ApiResource ===> API Controller'a ait index, store, show, update, destroy route tanımlamalarını ve metotlarını oluşturmayı sağlar.
  * php artisan make:controller ArticleController --api
  */
-Route::resource("articles", "ArticleController");
+//Route::resource("articles", "ArticleController");
 //Route::apiResource("/api/article", "Api/ArticleController");
+Route::prefix('article')->name('article.')->controller('ArticleController')->group(function () {
+    Route::get('list', "index")->name('index');
+    Route::get('detail/{article:slug_name}', "show")->name('show');
+});
 /*
  * where, whereNumber, whereAlpha, whereAlphaNumeric, whereUuid, whereUlid, whereIn
  */
