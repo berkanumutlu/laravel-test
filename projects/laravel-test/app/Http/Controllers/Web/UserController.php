@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -24,7 +25,13 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        dump('User #'.$id.' deleted.');
+        try {
+            User::where("id", $id)->delete();
+            alert()->success("Success", "User has been updated deleted.")->showConfirmButton("OK");
+        } catch (\Exception $e) {
+            alert()->error("Error", "An error occurred while deleting a user.")->showConfirmButton("OK");
+        }
+        return redirect()->back();
     }
 
     public function show(Request $request, $id)
