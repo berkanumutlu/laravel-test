@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\ArticleUpdateRequest;
 use App\Models\Article;
 use App\Models\Category;
+use App\Traits\Loggable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ArticleController extends BaseController
 {
+    use Loggable;
+
     /**
      * Display a listing of the resource.
      */
@@ -76,16 +79,24 @@ class ArticleController extends BaseController
      */
     public function update(ArticleUpdateRequest $request, string $id)
     {
-        $slug = !empty($request->slug_name) ? Str::slug($request->slug_name) : Str::slug($request->title);
+        $article = Article::query()->where("id", $id)->first();
+        $article->slug_name = !empty($request->slug_name) ? Str::slug($request->slug_name) : Str::slug($request->title);
+        $article->title = trim($request->title);
+        $article->body = $request->body;
+        $article->category_id = $request->category_id ?? null;
+        $article->is_active = isset($request->is_active) ? 1 : 0;
+        /*$slug = !empty($request->slug_name) ? Str::slug($request->slug_name) : Str::slug($request->title);
         $data = [
             'title'       => trim($request->title),
             'slug_name'   => $slug,
             'body'        => $request->body,
             'category_id' => $request->category_id ?? null,
             'is_active'   => isset($request->is_active) ? 1 : 0
-        ];
+        ];*/
         try {
-            Article::query()->where('id', $id)->update($data);
+            //Article::query()->where('id', $id)->update($data);
+            $this->updateLog($article);
+            $article->save();
         } catch (\Exception $e) {
             alert()->error("Error", "Record could not be updated.")->showConfirmButton("OK");
             return redirect()->back()->exceptInput("_token", "files", "image");
