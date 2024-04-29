@@ -48,6 +48,9 @@
     @endphp
     <x-input-text2 :type="'text'" :name="'fullname2'" class="bg-" :color="$color" :error="false"/>
     <hr>
+    <h6>Custom Helper</h6>
+    <p>Date: @php echo date('Y-m-d H:i:s'); @endphp</p>
+    <p>Formatted Date: @php echo date_format_custom(date('Y-m-d H:i:s')); @endphp</p>
 @endsection
 @section("scripts")
 
