@@ -5,10 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ isset($title) ? $title. ' - Laravel' : 'Laravel' }}</title>
+    <title>{{ isset($title) ? $title. ' - '.$site_name : $site_slogan.' - '.$site_name }}</title>
     @yield("head")
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/web/style.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/web/css/style.min.css') }}">
     @yield("style")
 </head>
 <body>
@@ -46,6 +46,9 @@
                 @endif
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('login') ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('register') ? 'active' : '' }}" href="{{ route('register') }}">Register</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

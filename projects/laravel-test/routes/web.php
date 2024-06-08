@@ -117,3 +117,6 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
 Route::get('login', [\App\Http\Controllers\Web\LoginController::class, "index"])->name('login');
 Route::post('login', [\App\Http\Controllers\Web\LoginController::class, "login"]);
 Route::get('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"])->name('logout');
+Route::get('register', [\App\Http\Controllers\Web\RegisterController::class, "index"])->middleware('guest:web')->name('register');
+Route::post('register', [\App\Http\Controllers\Web\RegisterController::class, "store"]);
+Route::get('auth/verify/{token}', [\App\Http\Controllers\Web\RegisterController::class, "verify"])->name('auth.verify.token');
