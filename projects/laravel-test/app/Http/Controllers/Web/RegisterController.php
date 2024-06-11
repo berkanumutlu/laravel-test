@@ -2,7 +2,7 @@
 // php artisan make:controller Web / RegisterController
 namespace App\Http\Controllers\Web;
 
-use App\Events\UserRegistered;
+//use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\UserStoreRequest;
 use App\Models\User;
@@ -26,7 +26,7 @@ class RegisterController extends Controller
         $user->status = 0;
         try {
             $user->save();
-            event(new UserRegistered($user));
+            //event(new UserRegistered($user));
         } catch (\Exception $e) {
             alert()->error("Error", "An error occurred while registering.")->showConfirmButton("OK");
             return redirect()->back()->exceptInput("_token", "password", "password_confirmation");
