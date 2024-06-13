@@ -15,12 +15,13 @@ class Language
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $language = session()->get('current_language');
-        $default_language = app()->getLocale();
-        if ($language !== $default_language) {
-            app()->setLocale($default_language);
+        if (!is_null(session()->get('locale'))) {
+            app()->setLocale(session()->get('locale'));
+        } else {
+            session()->put('locale', app()->getLocale());
+            app()->setLocale(session()->get('locale'));
+            //str_replace('_', '-', app()->getLocale());
         }
-        //dump(app()->getLocale());
         return $next($request);
     }
 }

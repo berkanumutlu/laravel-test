@@ -51,6 +51,26 @@
     <h6>Custom Helper</h6>
     <p>Date: @php echo date('Y-m-d H:i:s'); @endphp</p>
     <p>Formatted Date: @php echo date_format_custom(date('Y-m-d H:i:s')); @endphp</p>
+    <h6>Language List</h6>
+    <ul>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'en']) }}">English</a></li>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'tr']) }}">Turkish</a></li>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'de']) }}">German</a></li>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'fr']) }}">French</a></li>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'es']) }}">Spanish</a></li>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'ru']) }}">Russian</a></li>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'ar']) }}">Arabic</a></li>
+        <li><a href="{{ route('set.locale', ['languageCode' => 'it']) }}">Italian</a></li>
+    </ul>
+    <div class="m-l-5">
+        <p>{{ App::isLocale('en') }}</p>
+        <p>{{ App::currentLocale() }}</p>
+        <p>{{ App::getLocale() }}</p>
+        <p>{{ app()->currentLocale() }}</p>
+        <p>{{ app()->getLocale() }}</p>
+        <p>{{ Config::get('app.locale') }}</p>
+        <p>{{ config()->get('app.locale') }}</p>
+    </div>
 @endsection
 @section("scripts")
 

@@ -120,3 +120,4 @@ Route::get('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"
 Route::get('register', [\App\Http\Controllers\Web\RegisterController::class, "index"])->middleware('guest:web')->name('register');
 Route::post('register', [\App\Http\Controllers\Web\RegisterController::class, "store"]);
 Route::get('auth/verify/{token}', [\App\Http\Controllers\Web\RegisterController::class, "verify"])->name('auth.verify.token');
+Route::get('locale/{languageCode}', [\App\Http\Controllers\LocalizationController::class, "set_locale"])->name('set.locale');
