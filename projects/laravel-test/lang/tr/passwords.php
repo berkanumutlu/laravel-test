@@ -18,5 +18,4 @@ return [
     'throttled' => 'Tekrar denemeden önce lütfen bekleyin.',
     'token'     => 'Bu şifre sıfırlama belirteci geçersiz.',
     'user'      => "Bu e-posta adresiyle bir kullanıcı bulamıyoruz.",
-
 ];

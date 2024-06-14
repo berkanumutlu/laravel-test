@@ -19,7 +19,7 @@ class Article extends Model
     /*
      * Doldurulabilecek, kullanılacak alanları seçmemizi sağlıyor. Fillable veya Guarded tanımı yoksa hiçbir alanla işlem yapılamaz.
      */
-    //protected $fillable = ['title', 'body', 'category_id', 'is_active', 'slug_name'];
+    //protected $fillable = ['title', 'body', 'category_id', 'is_active', 'slug'];
     /*
      * Kullanılmayacak, hariç tutulacak alanları seçmemizi sağlıyor. Boş bırakılırsa tüm alanlar kullanılır. 'id' yazınca id hariç hepsini kullan anlamına geliyor.
      */

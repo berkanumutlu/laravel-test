@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ArticleController extends Controller
 {
@@ -20,9 +21,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $records = Article::query()->select([
-            'id', 'title', 'slug_name', 'body'
-        ])->orderBy('created_at')->paginate(6);
+        $current_language = session()->get('current_language')->id;
+        $records = Article::query()->where('language_id', $current_language)->whereNot('category_id', null)
+            ->select(['id', 'title', 'slug', 'body'])
+            ->orderBy('created_at', 'desc')->paginate(6);
         $title = 'Article List';
         return view('web.article.index', compact(['title', 'records']));
     }
@@ -46,9 +48,27 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show(Request $request)
     {
-        dump("article show - ".$article->slug_name);
+        $slug = LaravelLocalization::transRoute('routes.'.str_replace('article.page.', '',
+                $request->route()->getName()));
+        $record = Article::query()->where('slug', $slug)->where('is_active', 1)
+            ->select(['id', 'title', 'slug', 'body'])->first();
+        if (empty($record)) {
+            abort(404);
+        }
+        $title = $record->title;
+        return view('web.article.detail', compact(['title', 'record']));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show_article_page(Article $article)
+    {
+        $record = $article;
+        $title = $record->title;
+        return view('web.article.detail', compact(['title', 'record']));
     }
 
     /**

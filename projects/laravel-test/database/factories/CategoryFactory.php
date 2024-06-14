@@ -18,9 +18,9 @@ class CategoryFactory extends Factory
     {
         $name = fake()->name;
         return [
-            'name'      => $name,
-            'status'    => fake()->boolean,
-            'slug_name' => Str::slug($name),
+            'name'   => $name,
+            'status' => fake()->boolean,
+            'slug'   => Str::slug($name),
         ];
     }
 }

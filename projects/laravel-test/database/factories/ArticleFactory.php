@@ -19,7 +19,7 @@ class ArticleFactory extends Factory
         $title = fake()->name;
         return [
             'title'       => $title,
-            'slug_name'   => Str::slug($title),
+            'slug'        => Str::slug($title),
             'body'        => fake()->paragraph,
             'is_active'   => fake()->boolean,
             'category_id' => random_int(1, 10),

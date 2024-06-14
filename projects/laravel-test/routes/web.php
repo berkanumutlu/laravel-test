@@ -25,25 +25,20 @@ use Illuminate\Support\Facades\Route;
 /*
  * name ===> Front tarafında belirtilen isimdeki route'a ulaşmak için kullanılır.
  */
-Route::get('/', [\App\Http\Controllers\Web\HomeController::class, "index"])
-    ->name('home');
-Route::get('/about', [\App\Http\Controllers\Web\AboutController::class, "index"])
-    ->name('about');
-Route::get('/contact', [\App\Http\Controllers\Web\ContactController::class, "index"])
-    ->name('contact');
+//Route::get('/', [\App\Http\Controllers\Web\HomeController::class, "index"])->name('home');
+Route::get('/about', [\App\Http\Controllers\Web\AboutController::class, "index"])->name('about');
+Route::get('/contact', [\App\Http\Controllers\Web\ContactController::class, "index"])->name('contact');
 Route::post('/contact', [\App\Http\Controllers\Web\ContactController::class, "contact_form"]);
 /*
  * where ===> URL'deki parametrelere belirli koşullar atamak için kullanılır.
  */
-Route::post('/contact/user/{id}/{name}', [\App\Http\Controllers\Web\ContactController::class, "user_form"])
-    ->name('contact.user_form')
+Route::post('/contact/user/{id}/{name}', [\App\Http\Controllers\Web\ContactController::class, "user_form"])->name('contact.user_form')
     //->where("id", "[0-9]+");
     ->where(["id" => "[0-9]+", "name" => "[a-z]+"]);
 /*
  * Match ===> Bir adrese birden fazla metotlarla(get, post) ulaşmak için kullanılır.
  */
-Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\Web\ContactController::class, "match_form"])
-    ->name('contact.match_form');
+Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\Web\ContactController::class, "match_form"])->name('contact.match_form');
 /*
  * Patch ===> Kullanıcıya ait sadece tek bir veriyi güncellemek için kullanılır. Örneğin sadece kullanıcı adı
  *
@@ -51,14 +46,10 @@ Route::match(['get', 'post'], '/match_form', [\App\Http\Controllers\Web\ContactC
  *
  * Delete ===> Kullanıcıyı, veriyi silmek için kullanılır.
  */
-Route::get('user', [\App\Http\Controllers\Web\UserController::class, "index"])
-    ->name('user');
-Route::patch('user/{id}/update', [\App\Http\Controllers\Web\UserController::class, "update"])
-    ->name('user.update');
-Route::put('user/{id}/update-all', [\App\Http\Controllers\Web\UserController::class, "update_all"])
-    ->name('user.update_all');
-Route::delete('user/{id}/delete', [\App\Http\Controllers\Web\UserController::class, "delete"])
-    ->name('user.delete');
+Route::get('user', [\App\Http\Controllers\Web\UserController::class, "index"])->name('user');
+Route::patch('user/{id}/update', [\App\Http\Controllers\Web\UserController::class, "update"])->name('user.update');
+Route::put('user/{id}/update-all', [\App\Http\Controllers\Web\UserController::class, "update_all"])->name('user.update_all');
+Route::delete('user/{id}/delete', [\App\Http\Controllers\Web\UserController::class, "delete"])->name('user.delete');
 /*
  * Any ===> Tüm istek türlerini kabul eder.
  */
@@ -74,22 +65,18 @@ Route::any('any', function () {
  */
 //Route::resource("articles", "ArticleController");
 //Route::apiResource("/api/article", "Api/ArticleController");
-Route::prefix('article')->name('article.')->controller('ArticleController')->group(function () {
+/*Route::prefix('article')->name('article.')->controller('ArticleController')->group(function () {
     Route::get('list', "index")->name('index');
-    Route::get('detail/{article:slug_name}', "show")->name('show');
-});
+    Route::get('detail/{article:slug}', "show")->name('show');
+});*/
 /*
  * where, whereNumber, whereAlpha, whereAlphaNumeric, whereUuid, whereUlid, whereIn
  */
-Route::get("/user/{id}", [\App\Http\Controllers\Web\UserController::class, "show"])
-    ->name('user.show')
-    ->whereNumber("id");
-Route::get("/user/{name}", [\App\Http\Controllers\Web\UserController::class, "show_name"])
-    ->name('user.show_name')
+Route::get("/user/{id}", [\App\Http\Controllers\Web\UserController::class, "show"])->name('user.show')->whereNumber("id");
+Route::get("/user/{name}", [\App\Http\Controllers\Web\UserController::class, "show_name"])->name('user.show_name')
     //->whereAlpha("name");
     ->whereAlphaNumeric("name"); // Hem numeric hem karakter gelebilir anlamına geliyor.
-Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::class, "check_role"])
-    ->name('user.check_role')
+Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::class, "check_role"])->name('user.check_role')
     ->whereIn("role", ["admin", "user"]);
 /*
  * Prefix ===> Route değerinin başına ön ek eklemeyi sağlıyor.
@@ -120,4 +107,10 @@ Route::get('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"
 Route::get('register', [\App\Http\Controllers\Web\RegisterController::class, "index"])->middleware('guest:web')->name('register');
 Route::post('register', [\App\Http\Controllers\Web\RegisterController::class, "store"]);
 Route::get('auth/verify/{token}', [\App\Http\Controllers\Web\RegisterController::class, "verify"])->name('auth.verify.token');
-Route::get('locale/{languageCode}', [\App\Http\Controllers\LocalizationController::class, "set_locale"])->name('set.locale');
+Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale())->controller('\Mcamara\LaravelLocalization\Facades\LaravelLocalization')->middleware(['localize', 'localizationRedirect'])
+    ->group(function () {
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.home'), [\App\Http\Controllers\Web\HomeController::class, "index"])->name('home');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.article_list'), [\App\Http\Controllers\Web\ArticleController::class, "index"])->name('article.list');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.article_detail'), [\App\Http\Controllers\Web\ArticleController::class, "show_article_page"])->name('article.detail');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.about_us'), [\App\Http\Controllers\Web\ArticleController::class, "show"])->name('about_us');
+    });

@@ -10,7 +10,7 @@
                     <div class="col-lg-4">
                         <x-article :item="$item">
                             <x-slot name="title">{{ $item->title }}</x-slot>
-                            <x-slot:subtitle>{{ $item->slug_name }}</x-slot:subtitle>
+                            <x-slot:subtitle>{{ $item->slug }}</x-slot:subtitle>
                             <hr>
                             <x-slot name="content">{!! $item->body !!}</x-slot>
                         </x-article>

@@ -33,10 +33,12 @@ return new class extends Migration {
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id('Id');
+            $table->integer('language_group_id')->nullable();
+            $table->unsignedBigInteger('language_id');
             $table->string('title', 80);
+            $table->string('slug');
             $table->text('body');
             $table->tinyInteger('status')->default(0);
-            $table->string('slug_name');
             $table->timestamps(); // created_at, updated_at
             /*
              * env içerisinde db karakteri türü set edilerek aşağıdaki kod tekrarına gerek kalmaz.

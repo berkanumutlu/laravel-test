@@ -63,17 +63,22 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        'auth'             => \App\Http\Middleware\Authenticate::class,
-        'auth.basic'       => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'auth.session'     => \Illuminate\Session\Middleware\AuthenticateSession::class,
-        'cache.headers'    => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can'              => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'            => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'precognitive'     => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
-        'signed'           => \App\Http\Middleware\ValidateSignature::class,
-        'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'language'         => \App\Http\Middleware\Language::class,
+        'auth'                  => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'            => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'auth.session'          => \Illuminate\Session\Middleware\AuthenticateSession::class,
+        'cache.headers'         => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can'                   => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'                 => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'password.confirm'      => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'precognitive'          => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
+        'signed'                => \App\Http\Middleware\ValidateSignature::class,
+        'throttle'              => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'language'              => \App\Http\Middleware\Language::class,
+        'localize'              => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        'localizationRedirect'  => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+        'localeCookieRedirect'  => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
+        'localeViewPath'        => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
     ];
 }

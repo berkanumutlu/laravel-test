@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ $current_language->code }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -23,52 +23,57 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" aria-current="page"
-                       href="{{ route('home') }}">Home</a>
+                       href="{{ route('home') }}">{{ __('global.home') }}</a>
                     {{--<a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>--}}
                     {{--<a class="nav-link {{ request()->route()->getName() == 'home' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>--}}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">About
-                        Us</a>
+                    <a class="nav-link {{ Route::is('about.us') ? 'active' : '' }}"
+                       href="{{ LaravelLocalization::getURLFromRouteNameTranslated($current_language->code, 'routes.about_us') }}">{{ __('global.about_us') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('article.index') ? 'active' : '' }}"
-                       href="{{ route('article.index') }}">Articles</a>
+                    <a class="nav-link {{ Route::is('article.list') ? 'active' : '' }}"
+                       href="{{ route('article.list') }}">{{ __('global.articles') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('contact') ? 'active' : '' }}"
-                       href="{{ route('contact') }}">Contact</a>
+                       href="{{ route('contact') }}">{{ __('global.contact') }}</a>
                 </li>
                 @if(Auth::guard('web')->check())
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('user') ? 'active' : '' }}" href="{{ route('user') }}">User</a>
+                        <a class="nav-link {{ Route::is('user') ? 'active' : '' }}"
+                           href="{{ route('user') }}">{{ __('global.user') }}</a>
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('login') ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link {{ Route::is('login') ? 'active' : '' }}"
+                       href="{{ route('login') }}">{{ __('global.login') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('register') ? 'active' : '' }}" href="{{ route('register') }}">Register</a>
+                    <a class="nav-link {{ Route::is('register') ? 'active' : '' }}"
+                       href="{{ route('register') }}">{{ __('global.register') }}</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false"> Dropdown </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
+                @if(!empty($languages))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false"> {{ $current_language->code ?? '' }} </a>
+                        <ul class="dropdown-menu">
+                            @foreach($languages as $language)
+                                <li>
+                                    <a href="{{ $language->url }}" class="dropdown-item">{{ $language->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="{{ __('global.search') }}"
+                       aria-label="{{ __('global.search') }}">
+                <button class="btn btn-outline-success" type="submit">{{ __('global.search') }}</button>
             </form>
         </div>
     </div>

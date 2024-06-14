@@ -61,7 +61,7 @@ class ArticleController extends BaseController
      */
     public function edit(string $id = null)
     {
-        $record = Article::query()->select(['title', 'body', 'category_id', 'is_active', 'slug_name'])
+        $record = Article::query()->select(['title', 'body', 'category_id', 'is_active', 'slug'])
             ->where('id', $id)->first();
         if (is_null($record)) {
             alert()->error("Error", "Article not found.")->showConfirmButton("OK");
@@ -80,15 +80,15 @@ class ArticleController extends BaseController
     public function update(ArticleUpdateRequest $request, string $id)
     {
         $article = Article::query()->where("id", $id)->first();
-        $article->slug_name = !empty($request->slug_name) ? Str::slug($request->slug_name) : Str::slug($request->title);
+        $article->slug = !empty($request->slug) ? Str::slug($request->slug) : Str::slug($request->title);
         $article->title = trim($request->title);
         $article->body = $request->body;
         $article->category_id = $request->category_id ?? null;
         $article->is_active = isset($request->is_active) ? 1 : 0;
-        /*$slug = !empty($request->slug_name) ? Str::slug($request->slug_name) : Str::slug($request->title);
+        /*$slug = !empty($request->slug) ? Str::slug($request->slug) : Str::slug($request->title);
         $data = [
             'title'       => trim($request->title),
-            'slug_name'   => $slug,
+            'slug'   => $slug,
             'body'        => $request->body,
             'category_id' => $request->category_id ?? null,
             'is_active'   => isset($request->is_active) ? 1 : 0

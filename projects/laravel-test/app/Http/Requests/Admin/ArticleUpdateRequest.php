@@ -23,7 +23,7 @@ class ArticleUpdateRequest extends FormRequest
     {
         return [
             'title'       => ['required', 'max:80'],
-            'slug_name'   => ['max:255', 'unique:articles,slug_name,'.$this->id],
+            'slug'        => ['max:255', 'unique:articles,slug,'.$this->id],
             'body'        => ['required'],
             'category_id' => ['nullable', 'integer']
         ];

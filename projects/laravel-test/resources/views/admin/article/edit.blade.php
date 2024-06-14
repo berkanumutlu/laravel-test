@@ -28,9 +28,9 @@
                                value="{{ old('title') ?? ($record->title ?? '') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="slug_name" class="form-label">Slug</label>
-                        <input type="text" class="form-control" name="slug_name"
-                               value="{{ old('slug_name') ?? ($record->slug_name ?? '') }}">
+                        <label for="slug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" name="slug"
+                               value="{{ old('slug') ?? ($record->slug ?? '') }}">
                     </div>
                     <div class="mb-3">
                         <label for="body">Content</label>
