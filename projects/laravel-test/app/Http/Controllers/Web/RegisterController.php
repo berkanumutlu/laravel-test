@@ -28,10 +28,10 @@ class RegisterController extends Controller
             $user->save();
             //event(new UserRegistered($user));
         } catch (\Exception $e) {
-            alert()->error("Error", "An error occurred while registering.")->showConfirmButton("OK");
+            alert()->error("Error", trans_choice('auth.user_register', 'error'))->showConfirmButton("OK");
             return redirect()->back()->exceptInput("_token", "password", "password_confirmation");
         }
-        alert()->success("Success", "You have successfully registered. You can log in after email verification.")
+        alert()->success("Success", trans_choice('auth.user_register', 'success_with_confirmation'))
             ->showConfirmButton("OK");
         return redirect()->route('register');
     }

@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'failed'   => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'        => 'These credentials do not match our records.',
+    'password'      => 'The provided password is incorrect.',
+    'throttle'      => 'Too many login attempts. Please try again in :seconds seconds.',
+    'user_register' => "{error} An error occurred while registering.|{success} You have successfully registered.|{success_with_confirmation} You have successfully registered. A confirmation email has been sent to your e-mail address.",
 ];

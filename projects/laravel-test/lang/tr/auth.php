@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'failed'   => 'Bu kimlik bilgileri kayıtlarımızla eşleşmiyor.',
-    'password' => 'Verilen şifre yanlış.',
-    'throttle' => 'Çok fazla giriş denemesi var. Lütfen :saniye saniye içinde tekrar deneyin.',
+    'failed'        => 'Bu kimlik bilgileri kayıtlarımızla eşleşmiyor.',
+    'password'      => 'Verilen şifre yanlış.',
+    'throttle'      => 'Çok fazla giriş denemesi var. Lütfen :saniye saniye içinde tekrar deneyin.',
+    'user_register' => "{error} Kayıt olurken bir hata oluştu.|{success} Başarıyla kayıt oldunuz.|{success_with_confirmation} Başarıyla kayıt oldunuz. E-posta adresinize bir onay e-postası gönderildi.",
 ];
