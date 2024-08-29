@@ -101,12 +101,16 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
      });*/
 /*Route::get('/article', [\App\Http\Controllers\Web\ArticleController::class, "index"])
      ->name('article');*/
-Route::get('login', [\App\Http\Controllers\Web\LoginController::class, "index"])->name('login');
-Route::post('login', [\App\Http\Controllers\Web\LoginController::class, "login"]);
-Route::get('logout', [\App\Http\Controllers\Web\LoginController::class, "logout"])->name('logout');
-Route::get('register', [\App\Http\Controllers\Web\RegisterController::class, "index"])->middleware('guest:web')->name('register');
-Route::post('register', [\App\Http\Controllers\Web\RegisterController::class, "store"]);
-Route::get('auth/verify/{token}', [\App\Http\Controllers\Web\RegisterController::class, "verify"])->name('auth.verify.token');
+Route::controller('LoginController')->group(function () {
+    Route::get('login', "index")->name("login");
+    Route::post('login', "login");
+    Route::get('logout', "logout")->name("logout");
+});
+Route::controller('RegisterController')->group(function () {
+    Route::get('register', "index")->middleware("guest:web")->name("register");
+    Route::post('register', "store");
+    Route::get('auth/verify/{token}', "verify")->name('auth.verify.token');
+});
 Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale())->controller('\Mcamara\LaravelLocalization\Facades\LaravelLocalization')->middleware(['localize', 'localizationRedirect'])
     ->group(function () {
         Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.home'), [\App\Http\Controllers\Web\HomeController::class, "index"])->name('home');
@@ -114,3 +118,8 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
         Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.article_detail'), [\App\Http\Controllers\Web\ArticleController::class, "show_article_page"])->name('article.detail');
         Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.about_us'), [\App\Http\Controllers\Web\ArticleController::class, "show"])->name('about_us');
     });
+Route::domain('{account}.example.com')->group(function () {
+    Route::get('user/{id}', function (string $account, string $id) {
+        dd($account, $id);
+    });
+});

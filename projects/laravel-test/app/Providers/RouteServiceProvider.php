@@ -27,6 +27,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Tüm route tanımlarında id geçen parametrelerin sayı olması gerektiğini tanımlar.
+        Route::pattern('id', '[0-9]+');
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)
                 ->by($request->user()?->id ?: $request->ip());
