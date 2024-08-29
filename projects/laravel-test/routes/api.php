@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+/*
+ * Cross-Origin Resource Sharing (CORS)
+ * config/cors.php
+ */
+Route::middleware(['cors'])->group(function () {
+    Route::get('/api/data', 'DataController@index');
+});

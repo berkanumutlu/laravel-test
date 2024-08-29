@@ -31,6 +31,41 @@ class RouteServiceProvider extends ServiceProvider
         Route::pattern('id', '[0-9]+');
         // Implicit Enum Binding
         Route::model('user', \App\Models\User::class);
+        // Rate Limiter (throttle middleware)
+        RateLimiter::for('global', function (Request $request) {
+            return Limit::perMinute(1000)->response(function (Request $request, array $headers) {
+                return response('Custom response...', 429, $headers);
+            });
+        });
+        // Rate Limiter - Defining Rate Limiters
+        RateLimiter::for('global', function ($request) {
+            return $request->user()?->vipCustomer()
+                ? Limit::none()
+                : Limit::perMinute(60)->by($request->ip());
+        });
+        // Rate Limiter - Segmenting Rate Limits
+        RateLimiter::for('uploads', function (Request $request) {
+            return $request->user()
+                ? Limit::perMinute(100)->by($request->user()->id)
+                : Limit::perMinute(10)->by($request->ip());
+        });
+        // Rate Limiter - Multiple Rate Limits
+        RateLimiter::for('login', function (Request $request) {
+            return [
+                Limit::perMinute(500),
+                Limit::perMinute(3)->by($request->input('email')),
+            ];
+        });
+        // Rate Limiter - User plan based
+        RateLimiter::for('plan_based', function ($request) {
+            $user = $request->user();
+            return match ($user->plan) {
+                'free' => Limit::perMinute(30),
+                'basic' => Limit::perMinute(60),
+                'premium' => Limit::perMinute(120),
+                default => Limit::perMinute(10),
+            };
+        });
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)
                 ->by($request->user()?->id ?: $request->ip());

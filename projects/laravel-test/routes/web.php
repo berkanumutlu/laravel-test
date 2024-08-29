@@ -144,3 +144,15 @@ Route::get('/article/status/{status}', function (\App\Enums\ArticleStatus $statu
 Route::get('/users/{user}', function (\App\Models\User $user) {
     dd($user);
 });
+/*
+ * Attaching Rate Limiters to Routes
+ */
+Route::middleware(['throttle:uploads'])->group(function () {
+    Route::post('/audio', function () {
+        // ...
+    });
+
+    Route::post('/video', function () {
+        // ...
+    });
+});

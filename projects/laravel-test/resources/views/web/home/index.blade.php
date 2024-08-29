@@ -76,6 +76,7 @@
             <p>Config::get('app.locale'): {{ Config::get('app.locale') }}</p>
             <p>config()->get('app.locale'): {{ config()->get('app.locale') }}</p>
         </div>
+        <hr>
         <div>
             <h6>Maintenance Mode</h6>
             <p>To enable maintenance mode: <code>php artisan down</code></p>
@@ -93,6 +94,13 @@
             </p>
             <p>Disabling Maintenance Mode: <code>php artisan up</code>
             </p>
+        </div>
+        <hr>
+        <div>
+            <h6>Current Route</h6>
+            <p><strong>Route::current() (\Illuminate\Routing\Route):</strong> @dump(Route::current())</p>
+            <p><strong>Route::currentRouteName() (string):</strong> {{ Route::currentRouteName() }}</p>
+            <p><strong>Route::currentRouteAction() (string):</strong> {{ Route::currentRouteAction() }}</p>
         </div>
     </div>
 @endsection
