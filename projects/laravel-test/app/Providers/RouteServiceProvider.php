@@ -29,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         // Tüm route tanımlarında id geçen parametrelerin sayı olması gerektiğini tanımlar.
         Route::pattern('id', '[0-9]+');
+        // Implicit Enum Binding
+        Route::model('user', \App\Models\User::class);
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)
                 ->by($request->user()?->id ?: $request->ip());

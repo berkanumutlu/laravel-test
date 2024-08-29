@@ -115,11 +115,32 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     ->group(function () {
         Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.home'), [\App\Http\Controllers\Web\HomeController::class, "index"])->name('home');
         Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.article_list'), [\App\Http\Controllers\Web\ArticleController::class, "index"])->name('article.list');
-        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.article_detail'), [\App\Http\Controllers\Web\ArticleController::class, "show_article_page"])->name('article.detail');
+        Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.article_detail'), [\App\Http\Controllers\Web\ArticleController::class, "show_article_page"])->name('article.detail')
+            ->missing(function (\Illuminate\Http\Request $request) {
+                return \Illuminate\Support\Facades\Redirect::route('article.list');
+            });
         Route::get(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::transRoute('routes.about_us'), [\App\Http\Controllers\Web\ArticleController::class, "show"])->name('about_us');
     });
+/*
+ * Subdomain Routing
+ */
 Route::domain('{account}.example.com')->group(function () {
     Route::get('user/{id}', function (string $account, string $id) {
         dd($account, $id);
     });
+});
+/*
+ * Implicit Enum Binding
+ */
+Route::get('/article/status/{status}', function (\App\Enums\ArticleStatus $status) {
+    if ($status === \App\Enums\ArticleStatus::Published) {
+        return 'Published Articles';
+    }
+    return 'Article status: ' . $status->label();
+});
+/*
+ * Explicit Binding
+ */
+Route::get('/users/{user}', function (\App\Models\User $user) {
+    dd($user);
 });
