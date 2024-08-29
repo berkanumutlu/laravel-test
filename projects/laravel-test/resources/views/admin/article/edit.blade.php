@@ -54,7 +54,7 @@
                                name="is_active" {{ old('is_active') || !empty($record->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">Status</label>
                     </div>
-                    <button class="btn btn-info" type="submit">Save</button>
+                    <button class="btn btn-info text-white" type="submit">Save</button>
                 </form>
             </div>
         </div>

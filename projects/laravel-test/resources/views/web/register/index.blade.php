@@ -43,7 +43,7 @@
                                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-info">Register</button>
+                        <button type="submit" class="btn btn-info text-white">Register</button>
                     </div>
                 </form>
             </div>
