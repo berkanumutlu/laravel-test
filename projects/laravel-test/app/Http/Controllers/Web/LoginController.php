@@ -47,6 +47,7 @@ class LoginController extends Controller
         if (!empty($user)) {
             if (Hash::check($password, $user->password)) {
                 Auth::guard('web')->login($user, $remember_me);
+                $request->session()->regenerate();
                 $this->log('login', $user, $user->id);
                 return redirect()->route('login');
             }
@@ -63,7 +64,7 @@ class LoginController extends Controller
                 $this->log('logout', User::class, \auth()->id());
                 Auth::guard('web')->logout();
                 $request->session()->invalidate();
-                $request->session()->regenerate();
+                $request->session()->regenerateToken();
             } catch (\Exception $e) {
                 return redirect()->route('login')->withErrors($e->getMessage());
             }

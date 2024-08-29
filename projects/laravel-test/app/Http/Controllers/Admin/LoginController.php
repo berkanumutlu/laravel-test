@@ -67,6 +67,7 @@ class LoginController extends BaseController
          * Yönetici bilgilerini kontrol edip login yapmayı sağlıyor.
          */
         if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password], $remember_me)) {
+            $request->session()->regenerate();
             return redirect()->route('admin.home');
         }
         /*
@@ -85,7 +86,7 @@ class LoginController extends BaseController
             try {
                 Auth::guard('admin')->logout();
                 $request->session()->invalidate();
-                $request->session()->regenerate();
+                $request->session()->regenerateToken();
                 $result['status'] = true;
                 $result['redirect'] = route('admin.login.index');
             } catch (\Exception $e) {

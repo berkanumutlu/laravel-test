@@ -44,7 +44,7 @@
                             <label class="form-check-label" for="signInRememberMe">Remember me</label>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-info">Login</button>
+                            <button type="submit" class="btn btn-info text-white">Login</button>
                         </div>
                     </form>
                 @endif
