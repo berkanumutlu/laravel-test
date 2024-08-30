@@ -123,6 +123,37 @@
             <p>$request->ip(): <code>{{ $ipAddress }}</code></p>
             <p>$request->ips(): <code>{{ implode(',', $ipAddresses) }}</code></p>
         </div>
+        <hr>
+        <div>
+            <h6>Blade Directives</h6>
+            @production
+                // Production specific content...
+            @endproduction
+            @env('staging')
+                // The application is running in "staging"...
+            @endenv
+            @env(['staging', 'production'])
+                // The application is running in "staging" or "production"...
+            @endenv
+            @hasSection('navigation')
+                <div class="pull-right">
+                    @yield('navigation')
+                </div>
+
+                <div class="clearfix"></div>
+            @endif
+            @sectionMissing('navigation')
+                <div class="pull-right">
+                    {{--@include('default-navigation')--}}
+                </div>
+            @endif
+            {{--@session('status')
+            <div class="p-4 bg-green-100">
+                {{ $value }}
+            </div>
+            @endsession--}}
+            
+        </div>
     </div>
 @endsection
 @section("scripts")

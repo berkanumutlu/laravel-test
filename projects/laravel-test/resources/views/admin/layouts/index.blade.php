@@ -44,11 +44,11 @@
                     <a class="nav-link {{ Route::is('admin.article.edit') ? 'active' : '' }}"
                        href="{{ route('admin.article.edit', ['id' => 1]) }}">Edit Article #1</a>
                 </li>
-                @if(Auth::guard('admin')->check())
+                @auth('admin')
                     <li class="nav-item">
                         <a class="nav-link btnUserLogout" href="{{ route('admin.logout', ['id' => 1]) }}">Logout</a>
                     </li>
-                @endif
+                @endauth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false"> Dropdown </a>

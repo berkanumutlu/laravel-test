@@ -39,12 +39,12 @@
                     <a class="nav-link {{ Route::is('contact') ? 'active' : '' }}"
                        href="{{ route('contact') }}">{{ __('global.contact') }}</a>
                 </li>
-                @if(Auth::guard('web')->check())
+                @auth('web')
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('user') ? 'active' : '' }}"
                            href="{{ route('user') }}">{{ __('global.user') }}</a>
                     </li>
-                @endif
+                @endauth
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('login') ? 'active' : '' }}"
                        href="{{ route('login') }}">{{ __('global.login') }}</a>
