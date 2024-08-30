@@ -44,4 +44,22 @@ class UserStoreRequest extends FormRequest
             ]*/
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => trim($this->name)
+        ]);
+    }
+
+    /**
+     * Handle a passed validation attempt.
+     */
+    protected function passedValidation(): void
+    {
+        $this->replace(['name' => 'Berkan']);
+    }
 }
