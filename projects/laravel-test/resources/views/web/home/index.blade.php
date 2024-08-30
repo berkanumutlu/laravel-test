@@ -102,6 +102,27 @@
             <p><strong>Route::currentRouteName() (string):</strong> {{ Route::currentRouteName() }}</p>
             <p><strong>Route::currentRouteAction() (string):</strong> {{ Route::currentRouteAction() }}</p>
         </div>
+        <hr>
+        <div>
+            <h6>Request</h6>
+            <p>$request->path(): <code>{{ $uri }}</code></p>
+            <p>$request->url(): <code>{{ $url }}</code></p>
+            <p>$request->fullUrl(): <code>{{ $urlWithQueryString }}</code></p>
+            <p>$request->fullUrlWithQuery(['type' => 'phone']): <code>{{ $fullUrlWithQuery }}</code></p>
+            <p>$request->fullUrlWithoutQuery(['type']): <code>{{ $fullUrlWithoutQuery }}</code></p>
+            <hr>
+            <p>$request->host(): <code>{{ $host }}</code></p>
+            <p>$request->httpHost(): <code>{{ $httpHost }}</code></p>
+            <p>$request->schemeAndHttpHost(): <code>{{ $schemeAndHttpHost }}</code></p>
+            <hr>
+            <p>$request->method(): <code>{{ $requestMethod }}</code></p>
+            <p>$request->isMethod('get'): <code>{{ $requestIsMethodGet }}</code></p>
+            <p>$request->isMethod('post'): <code>{{ $requestIsMethodPost }}</code></p>
+            <p>$request->bearerToken(): <code>{{ $bearerToken }}</code></p>
+            <hr>
+            <p>$request->ip(): <code>{{ $ipAddress }}</code></p>
+            <p>$request->ips(): <code>{{ implode(',', $ipAddresses) }}</code></p>
+        </div>
     </div>
 @endsection
 @section("scripts")
