@@ -27,11 +27,11 @@ class LoginController extends Controller
 {
     use Loggable;
 
-    public function index()
+    public function index(Request $request)
     {
-        $is_logged_in = Auth::guard('web')->check();
+        //$is_logged_in = Auth::guard('web')->check();
         $title = 'Login';
-        return view('web.login.index', compact(['title', 'is_logged_in']));
+        return view('web.login.index', compact(['title']));
     }
 
     public function login(LoginRequest $request)
@@ -48,6 +48,14 @@ class LoginController extends Controller
             if (Hash::check($password, $user->password)) {
                 Auth::guard('web')->login($user, $remember_me);
                 $request->session()->regenerate();
+                $session = \App\Models\Session::query()->create([
+                    'user_id'       => $user->id,
+                    'ip_address'    => $request->ip(),
+                    'user_agent'    => $request->userAgent(),
+                    'payload'       => json_encode($request->except('password')),
+                    'last_activity' => now()
+                ]);
+                session()->put('user_session_id', $session->id);
                 $this->log('login', $user, $user->id);
                 return redirect()->route('login');
             }
@@ -61,6 +69,9 @@ class LoginController extends Controller
     {
         if (Auth::guard('web')->check()) {
             try {
+                \App\Models\Session::query()->where('id', session()->get('user_session_id'))->update([
+                    'last_activity' => now()
+                ]);
                 $this->log('logout', User::class, \auth()->id());
                 Auth::guard('web')->logout();
                 $request->session()->invalidate();

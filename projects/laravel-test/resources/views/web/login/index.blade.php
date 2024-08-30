@@ -10,7 +10,7 @@
                 <hr>
             </div>
             <div class="col-12">
-                @if($is_logged_in)
+                @auth('web')
                     <div class="d-flex flex-column align-items-center">
                         <p class="mb-0 fs-3">You're logged as <strong>{{ auth()->guard('web')->user()->name }}</strong>
                         </p>
@@ -47,7 +47,7 @@
                             <button type="submit" class="btn btn-info text-white">Login</button>
                         </div>
                     </form>
-                @endif
+                @endauth
             </div>
         </div>
     </div>

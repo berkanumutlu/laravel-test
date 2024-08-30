@@ -152,7 +152,6 @@
                 {{ $value }}
             </div>
             @endsession--}}
-            
         </div>
     </div>
 @endsection

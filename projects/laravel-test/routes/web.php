@@ -156,3 +156,9 @@ Route::middleware(['throttle:uploads'])->group(function () {
         // ...
     });
 });
+/*
+ * Session Blocking
+ */
+Route::post('/order', function () {
+    // ...
+})->block($lockSeconds = 10, $waitSeconds = 10);
