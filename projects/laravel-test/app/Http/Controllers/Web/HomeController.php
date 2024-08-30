@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -120,6 +121,18 @@ class HomeController extends Controller
             $path = $request->photo->storeAs('images', 'filename.jpg');
             $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
         }*/
+        /*
+         * Writing Log Messages
+         */
+        $message = 'This is a log message';
+        Log::emergency($message);
+        Log::alert($message);
+        Log::critical($message);
+        Log::error($message);
+        Log::warning($message);
+        Log::notice($message);
+        Log::info($message);
+        Log::debug($message);
         return view('web.home.index', compact([
             'person', 'name', 'age', 'uri', 'url', 'urlWithQueryString', 'fullUrlWithQuery', 'fullUrlWithoutQuery',
             'host', 'httpHost', 'schemeAndHttpHost', 'requestMethod', 'requestIsMethodGet', 'requestIsMethodPost',

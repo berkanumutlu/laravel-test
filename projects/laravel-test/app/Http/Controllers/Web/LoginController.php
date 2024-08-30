@@ -22,6 +22,7 @@ use App\Traits\Loggable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -43,22 +44,27 @@ class LoginController extends Controller
             //return redirect()->route('home');
             return redirect()->route('login');
         }*/
-        $user = User::query()->where("email", $email)->first();
-        if (!empty($user)) {
-            if (Hash::check($password, $user->password)) {
-                Auth::guard('web')->login($user, $remember_me);
-                $request->session()->regenerate();
-                $session = \App\Models\Session::query()->create([
-                    'user_id'       => $user->id,
-                    'ip_address'    => $request->ip(),
-                    'user_agent'    => $request->userAgent(),
-                    'payload'       => json_encode($request->except('password')),
-                    'last_activity' => now()
-                ]);
-                session()->put('user_session_id', $session->id);
-                $this->log('login', $user, $user->id);
-                return redirect()->route('login');
+        try {
+            $user = User::query()->where("email", $email)->first();
+            if (!empty($user)) {
+                if (Hash::check($password, $user->password)) {
+                    Auth::guard('web')->login($user, $remember_me);
+                    $request->session()->regenerate();
+                    $session = \App\Models\Session::query()->create([
+                        'user_id'       => $user->id,
+                        'ip_address'    => $request->ip(),
+                        'user_agent'    => $request->userAgent(),
+                        'payload'       => json_encode($request->except('password')),
+                        'last_activity' => now()
+                    ]);
+                    session()->put('user_session_id', $session->id);
+                    $this->log('login', $user, $user->id);
+                    Log::info('User {id} failed to login.', ['id' => $user->id]);
+                    return redirect()->route('login');
+                }
             }
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
         }
         return redirect()->route('login')->withErrors([
             "email" => "Email or password is incorrect."
