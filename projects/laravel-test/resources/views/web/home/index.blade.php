@@ -7,7 +7,7 @@
         <div>
             <h6>Compact variable</h6>
             <p>Home Page Content</p>
-            <p>Global current language: {{ $current_language ?? 'No Data' }}</p>
+            <p>Global current language: {{ $current_language?->code ?? 'No Data' }}</p>
             <p>Global data person: {{ $persona->name ?? 'No Data' }}</p>
             <p>Name: {{ $name ?? 'No Data' }}</p>
             <p>Age: {{ $age ?? 'No Data' }}</p>

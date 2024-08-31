@@ -9,14 +9,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserVerificationMail extends Mailable
+class UserSubscriptionMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user, public string $token)
+    public function __construct(public User $user)
     {
         //
     }
@@ -26,13 +26,8 @@ class UserVerificationMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $subject = 'Verify Your Account';
-        $settings = cache('settings');
-        if (!empty($settings) && !empty($settings->site_name)) {
-            $subject .= ' - '.$settings->site_name;
-        }
         return new Envelope(
-            subject: $subject,
+            subject: 'User Subscription Mail',
         );
     }
 
@@ -42,8 +37,8 @@ class UserVerificationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'web.email.user.verify',
-            with: ['user' => $this->user, 'token', $this->token]
+            view: 'web.email.user.subscription',
+            with: ['user' => $this->user]
         );
     }
 

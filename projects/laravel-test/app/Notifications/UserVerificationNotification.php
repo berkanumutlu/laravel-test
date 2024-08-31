@@ -39,7 +39,7 @@ class UserVerificationNotification extends Notification
         if (!empty($settings) && !empty($settings->site_name)) {
             $subject .= ' - '.$settings->site_name;
         }
-        return (new MailMessage)->view('web.email.verify',
+        return (new MailMessage)->view('web.email.user.verify',
             ['title' => $title, 'token' => $this->token, 'user' => $notifiable])
             ->subject($subject);
         /*return (new MailMessage)

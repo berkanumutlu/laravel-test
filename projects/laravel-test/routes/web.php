@@ -162,3 +162,12 @@ Route::middleware(['throttle:uploads'])->group(function () {
 Route::post('/order', function () {
     // ...
 })->block($lockSeconds = 10, $waitSeconds = 10);
+/*
+ * Programmatically Executing Commands
+ */
+Route::post('/user/{user}/mail', function (string $user) {
+    $exitCode = \Illuminate\Support\Facades\Artisan::call('mail:send', [
+        'user' => $user, '--queue' => 'default'
+    ]);
+    // ...
+});
