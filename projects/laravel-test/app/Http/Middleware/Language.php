@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -20,17 +19,8 @@ class Language
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $languages = Cache::remember('languages', null, function () {
-            return config('languages');
-        });
-        $default_language = Cache::remember('default_language', null, function () use ($languages) {
-            foreach ($languages as $language) {
-                if ($language['is_default'] == 1) {
-                    return (object) $language;
-                }
-            }
-            return (object) current($languages);
-        });
+        $languages = app('languages');
+        $default_language = app('default_language');
         App::setLocale($default_language->code);
         Session::put('current_language', $default_language);
         $locale = $request->segment(1);
