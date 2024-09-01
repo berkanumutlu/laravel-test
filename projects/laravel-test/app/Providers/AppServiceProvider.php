@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use app\Contracts\CustomCache;
+use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        /*
+         * Binding Contracts to Implementations
+         */
+        $this->app->singleton(Repository::class, function ($app) {
+            return new CustomCache;
+        });
     }
 
     /**
