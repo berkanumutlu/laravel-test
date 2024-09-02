@@ -29,12 +29,15 @@ class RouteServiceProvider extends ServiceProvider
     {
         // Tüm route tanımlarında id geçen parametrelerin sayı olması gerektiğini tanımlar.
         Route::pattern('id', '[0-9]+');
+
         // Implicit Enum Binding
         Route::model('user', \App\Models\User::class);
+
         /*
          * Rate Limiting
          */
         $this->configureRateLimiting();
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')

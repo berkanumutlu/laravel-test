@@ -6,6 +6,7 @@ use app\Contracts\CustomCache;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton('languages', function () {
+            return Cache::remember('languages', null, function () {
+                return config('languages');
+            });
+        });
+        $this->app->singleton('default_language', function () {
+            return Cache::remember('default_language', null, function () {
+                $languages = $this->app->languages;
+                foreach ($languages as $language) {
+                    if ($language['is_default'] == 1) {
+                        return (object) $language;
+                    }
+                }
+                return (object) current($languages);
+            });
+        });
+
         /*
          * Binding Contracts to Implementations
          */
