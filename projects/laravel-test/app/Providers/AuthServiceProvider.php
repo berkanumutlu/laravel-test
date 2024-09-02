@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Admin;
+use App\Models\Article;
+use App\Policies\ArticlePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        Article::class => ArticlePolicy::class,
     ];
 
     /**
@@ -39,5 +43,15 @@ class AuthServiceProvider extends ServiceProvider
 
             return new MongoUserProvider($app->make('mongo.connection'));
         });*/
+
+        /**
+         * Authorization
+         */
+        $this->registerPolicies();
+        Gate::define('admin-update-article', function (Admin $admin, Article $article) {
+            return $admin->id === $article->user_id;
+        });
+        
+        //Gate::define('update-post', [ArticlePolicy::class, 'update']);
     }
 }

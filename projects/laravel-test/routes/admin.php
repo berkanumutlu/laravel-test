@@ -25,6 +25,9 @@ Route::prefix("article")->name("article.")->controller('ArticleController')
     ->group(function () {
         Route::get("add", "create")->name("add");
         Route::get('edit/{id}', "edit")->whereNumber('id')->name('edit');
-        Route::post('edit/{id}', "update")->whereNumber('id');
+        /*
+         * Authorization with policy
+         */
+        Route::post('edit/{id}', "update")->whereNumber('id')->middleware('can:update,post');
         Route::get("delete/{id}", "destroy")->whereNumber('id')->name("delete");
     });

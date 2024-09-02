@@ -80,6 +80,14 @@ class ArticleController extends BaseController
     public function update(ArticleUpdateRequest $request, string $id)
     {
         $article = Article::query()->where("id", $id)->first();
+        /*
+         * Authorization
+         */
+        /*if (Gate::denies('admin-update-article', $article)) {
+            abort(403);
+        }*/
+        $this->authorize('admin_update', $article);
+
         $article->slug = !empty($request->slug) ? Str::slug($request->slug) : Str::slug($request->title);
         $article->title = trim($request->title);
         $article->body = $request->body;

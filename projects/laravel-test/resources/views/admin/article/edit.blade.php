@@ -54,7 +54,13 @@
                                name="is_active" {{ old('is_active') || !empty($record->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">Status</label>
                     </div>
-                    <button class="btn btn-info text-white" type="submit">Save</button>
+                    @can('admin-update-article', $record)
+                        <button class="btn btn-info text-white" type="submit">Save</button>
+                    @elsecan('view', $record)
+                        <a href="{{ route('posts.show', $record) }}">Görüntüle</a>
+                    @else
+                        <p>You do not have permission to edit the record.</p>
+                    @endcan
                 </form>
             </div>
         </div>
