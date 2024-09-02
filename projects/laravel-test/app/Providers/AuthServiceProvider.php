@@ -51,7 +51,60 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-update-article', function (Admin $admin, Article $article) {
             return $admin->id === $article->user_id;
         });
-        
+
+        // Supplying Additional Context
+        /*Gate::define('create-article', function (User $user, Category $category, bool $pinned) {
+            if (!$user->canPublishToGroup($category->group)) {
+                return false;
+            } elseif ($pinned && !$user->canPinPosts()) {
+                return false;
+            }
+            return true;
+        });
+        if (Gate::check('create-article', [$category, $pinned])) {
+            // The user can create the article...
+        }*/
+
+        // Gate Responses
+        /*Gate::define('edit-settings', function (User $user) {
+            return $user->isAdmin
+                ? Response::allow()
+                : Response::deny('You must be an administrator.');
+        });*/
+
+        // Customizing The HTTP Response Status
+        /*Gate::define('edit-settings', function (User $user) {
+            return $user->isAdmin
+                ? Response::allow()
+                : Response::denyWithStatus(404);
+        });
+        Gate::define('edit-settings', function (User $user) {
+            return $user->isAdmin
+                ? Response::allow()
+                : Response::denyAsNotFound();
+        });*/
+
+        // Intercepting Gate Checks
+        /*Gate::before(function (User $user, string $ability) {
+            if ($user->isAdministrator()) {
+                return true;
+            }
+        });
+        Gate::after(function (User $user, string $ability, bool|null $result, mixed $arguments) {
+            if ($user->isAdministrator()) {
+                return true;
+            }
+        });*/
+
+        // Inline Authorization
+        /*Gate::allowIf(fn (User $user) => $user->isAdministrator());
+        Gate::denyIf(fn (User $user) => $user->banned());*/
+
+        // Policy Auto-Discovery
+        Gate::guessPolicyNamesUsing(function (string $modelClass) {
+            // Return the name of the policy class for the given model...
+        });
+
         //Gate::define('update-post', [ArticlePolicy::class, 'update']);
     }
 }

@@ -15,6 +15,26 @@ class ArticleController extends BaseController
     use Loggable;
 
     /**
+     * Create the controller instance.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        /*
+         * Authorizing Resource Controllers
+         * Controller Method	Policy Method
+         * index	                viewAny
+         * show                     view
+         * create	                create
+         * store	                create
+         * edit	                    update
+         * update	                update
+         * destroy	                delete
+         */
+        // $this->authorizeResource(Article::class, 'article');
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -85,8 +105,43 @@ class ArticleController extends BaseController
          */
         /*if (Gate::denies('admin-update-article', $article)) {
             abort(403);
-        }*/
+        }
+        if (!Gate::allows('update-article', $article)) {
+            abort(403);
+        }
+        if ($request->user()->cannot('update', $article)) {
+            abort(403);
+        }
+        if ($request->user()->cannot('create', Article::class)) {
+            abort(403);
+        }
+        */
         $this->authorize('admin_update', $article);
+
+        // Authorizing Actions
+        /*if (Gate::forUser($user)->allows('update-article', $article)) {
+            // The user can update the article...
+        }
+        if (Gate::forUser($user)->denies('update-article', $article)) {
+            // The user can't update the article...
+        }
+        if (Gate::any(['update-article', 'delete-article'], $article)) {
+            // The user can update or delete the article...
+        }
+        if (Gate::none(['update-article', 'delete-article'], $article)) {
+            // The user can't update or delete the article...
+        }*/
+
+        // Gate Responses
+        /*$response = Gate::inspect('edit-settings');
+        if ($response->allowed()) {
+            // The action is authorized...
+        } else {
+            echo $response->message();
+        }*/
+
+        // Authorizing or Throwing Exceptions
+        // Gate::authorize('update-article', $article);
 
         $article->slug = !empty($request->slug) ? Str::slug($request->slug) : Str::slug($request->title);
         $article->title = trim($request->title);

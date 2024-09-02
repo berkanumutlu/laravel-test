@@ -61,6 +61,12 @@
                     @else
                         <p>You do not have permission to edit the record.</p>
                     @endcan
+
+                    @canany(['update', 'view', 'delete'], $record)
+                        <!-- The current user can update, view, or delete the post... -->
+                    @elsecanany(['create'], \App\Models\Article::class)
+                        <!-- The current user can create a post... -->
+                    @endcanany
                 </form>
             </div>
         </div>

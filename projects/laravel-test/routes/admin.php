@@ -28,6 +28,7 @@ Route::prefix("article")->name("article.")->controller('ArticleController')
         /*
          * Authorization with policy
          */
-        Route::post('edit/{id}', "update")->whereNumber('id')->middleware('can:update,post');
+        Route::post('edit/{id}', "update")->whereNumber('id')->middleware('can:update,article');
+        // Route::post('edit/{id}', "update")->whereNumber('id')->can('update', 'article');
         Route::get("delete/{id}", "destroy")->whereNumber('id')->name("delete");
     });
