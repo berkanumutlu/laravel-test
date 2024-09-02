@@ -5,6 +5,8 @@
  */
 
 import axios from 'axios';
+import Echo from "laravel-echo";
+
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -30,3 +32,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: import.meta.env.PUSHER_APP_KEY,
+    cluster: import.meta.env.PUSHER_APP_CLUSTER,
+    encrypted: true,
+    forceTLS: true
+});
+
+var channel = Echo.channel('my-channel');
+channel.listen('.my-event', function (data) {
+    alert(JSON.stringify(data));
+});
+
+Echo.channel(`orders.${this.order.id}`)
+    .listen('OrderShipmentStatusUpdated', (e) => {
+        console.log(e.order.code);
+    });

@@ -47,7 +47,7 @@
                 @endauth
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('login') ? 'active' : '' }}"
-                       href="{{ route('login') }}">{{ __('global.login') }}</a>
+                       href="{{ route('login.index') }}">{{ __('global.login') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('register') ? 'active' : '' }}"

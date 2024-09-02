@@ -42,7 +42,7 @@ class LoginController extends Controller
         $remember_me = isset($request->remember_me);
         /*if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password], $remember_me)) {
             //return redirect()->route('home');
-            return redirect()->route('login');
+            return redirect()->route('login.index');
         }*/
         try {
             $user = User::query()->where("email", $email)->first();
@@ -60,13 +60,13 @@ class LoginController extends Controller
                     session()->put('user_session_id', $session->id);
                     $this->log('login', $user, $user->id);
                     Log::info('User {id} failed to login.', ['id' => $user->id]);
-                    return redirect()->route('login');
+                    return redirect()->route('login.index');
                 }
             }
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
-        return redirect()->route('login')->withErrors([
+        return redirect()->route('login.index')->withErrors([
             "email" => "Email or password is incorrect."
         ])->onlyInput("email", "remember_me");
     }
@@ -83,10 +83,10 @@ class LoginController extends Controller
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
             } catch (\Exception $e) {
-                return redirect()->route('login')->withErrors($e->getMessage());
+                return redirect()->route('login.index')->withErrors($e->getMessage());
             }
         }
-        return redirect()->route('login');
+        return redirect()->route('login.index');
         //return redirect()->back();
     }
 }

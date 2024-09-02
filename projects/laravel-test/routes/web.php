@@ -102,7 +102,7 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
 /*Route::get('/article', [\App\Http\Controllers\Web\ArticleController::class, "index"])
      ->name('article');*/
 Route::controller('LoginController')->group(function () {
-    Route::get('login', "index")->name("login");
+    Route::get('login', "index")->name("login.index");
     Route::post('login', "login");
     Route::get('logout', "logout")->name("logout");
 });
@@ -185,3 +185,11 @@ Route::post('/user/{user}/mail', function (string $user) {
  * Mail, Queue
  */
 Route::get('send-mail', [\App\Http\Controllers\Web\MailController::class, 'sendMail']);
+/*
+ * Broadcasting
+ */
+Route::name('order.')->controller('OrderController')->middleware('auth:web')->group(function () {
+    Route::get('orders', "index")->name('list');
+    Route::get('order/{order:id}', "show")->name('detail');
+    Route::get('order-shipped/{id}', "order_shipped")->name('detail');
+});

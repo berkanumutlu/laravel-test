@@ -17,7 +17,7 @@
                         <a href="{{ route('logout') }}">Log out</a>
                     </div>
                 @else
-                    <form action="{{ route('login') }}" method="POST" style="margin: 0 auto;max-width: 50%;">
+                    <form action="{{ route('login.index') }}" method="POST" style="margin: 0 auto;max-width: 50%;">
                         @csrf
                         @if($errors->any())
                             <div class="alert alert-danger">

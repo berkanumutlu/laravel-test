@@ -2,6 +2,7 @@
 // php artisan make:controller Web/HomeController
 namespace App\Http\Controllers\Web;
 
+use App\Events\PusherEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +21,7 @@ class HomeController extends Controller
         //return view('web.home.index', compact('name'));
         //return view('web.home.index')->with('name', $name)->with('age', $age);
         //return view('web.home.index')->with(['name' => $name, 'age' => $age]);
+
         /*
          * Request - Retrieving the Request Path
          * e.g. http://example.com/foo/bar, path => foo/bar
@@ -121,6 +123,7 @@ class HomeController extends Controller
             $path = $request->photo->storeAs('images', 'filename.jpg');
             $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
         }*/
+
         /*
          * Writing Log Messages
          */
@@ -133,6 +136,12 @@ class HomeController extends Controller
         Log::notice($message);
         Log::info($message);
         Log::debug($message);
+
+        /*
+         * Broadcasting - Pusher
+         */
+        event(new PusherEvent('hello world'));
+
         return view('web.home.index', compact([
             'person', 'name', 'age', 'uri', 'url', 'urlWithQueryString', 'fullUrlWithQuery', 'fullUrlWithoutQuery',
             'host', 'httpHost', 'schemeAndHttpHost', 'requestMethod', 'requestIsMethodGet', 'requestIsMethodPost',
