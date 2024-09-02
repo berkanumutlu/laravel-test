@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+
         /*
          * Task Scheduling
          */
@@ -51,6 +52,11 @@ class Kernel extends ConsoleKernel
                 // \Illuminate\Support\Facades\Mail::to('admin@example.com')->send(new ErrorOccurredMail());
             });
 
+        /*
+         * Laravel Sanctum - Token Expiration
+         */
+        $schedule->command('sanctum:prune-expired --hours=24')->daily();
+        
     }
 
     /**
