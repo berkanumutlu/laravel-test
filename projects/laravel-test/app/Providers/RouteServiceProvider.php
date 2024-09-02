@@ -31,6 +31,27 @@ class RouteServiceProvider extends ServiceProvider
         Route::pattern('id', '[0-9]+');
         // Implicit Enum Binding
         Route::model('user', \App\Models\User::class);
+        /*
+         * Rate Limiting
+         */
+        $this->configureRateLimiting();
+        $this->routes(function () {
+            Route::middleware('api')
+                ->prefix('api')
+                ->group(base_path('routes/api.php'));
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/web.php'));
+            Route::middleware(['admin', 'auth:admin'])
+                ->prefix('admin')
+                ->name('admin.')
+                ->namespace($this->namespace_admin)
+                ->group(base_path('routes/admin.php'));
+        });
+    }
+
+    protected function configureRateLimiting()
+    {
         // Rate Limiter (throttle middleware)
         RateLimiter::for('global', function (Request $request) {
             return Limit::perMinute(1000)->response(function (Request $request, array $headers) {
@@ -56,6 +77,12 @@ class RouteServiceProvider extends ServiceProvider
                 Limit::perMinute(3)->by($request->input('email')),
             ];
         });
+        /*RateLimiter::for('login', function ($request) {
+            if ($request->user() && $request->user()->isAdmin()) {
+                return Limit::none();
+            }
+            return Limit::perMinute(5)->by($request->input('email'));
+        });*/
         // Rate Limiter - User plan based
         RateLimiter::for('plan_based', function ($request) {
             $user = $request->user();
@@ -69,19 +96,6 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)
                 ->by($request->user()?->id ?: $request->ip());
-        });
-        $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-            Route::middleware(['admin', 'auth:admin'])
-                ->prefix('admin')
-                ->name('admin.')
-                ->namespace($this->namespace_admin)
-                ->group(base_path('routes/admin.php'));
         });
     }
 }

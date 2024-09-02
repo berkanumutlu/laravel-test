@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
@@ -32,6 +33,18 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
+        /*
+         * ThrottleRequestsException
+         */
+        if ($e instanceof ThrottleRequestsException) {
+            return response()->json([
+                'message'     => 'Too many requests. Please try again later.',
+                'retry_after' => $e->getHeaders()['Retry-After']
+            ], 429);
+        }
+        /*
+         * Custom Error Page
+         */
         if ($this->isHttpException($e)) {
             return $this->renderHttpExceptionCustom($e, $request);
         }

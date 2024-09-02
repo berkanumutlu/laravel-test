@@ -156,6 +156,16 @@ Route::middleware(['throttle:uploads'])->group(function () {
         // ...
     });
 });
+// 1 dakika içerisinde en fazla 10 istek atılabilir.
+Route::middleware('throttle:10,1')->group(function () {
+    Route::get('/profile', function () {
+        return 'Profile page';
+    });
+
+    Route::get('/settings', function () {
+        return 'Settings page';
+    });
+});
 /*
  * Session Blocking
  */
