@@ -23,7 +23,43 @@ class RegisterController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+
+        /*
+         * Hashing
+         */
+        /*$request->user()->fill([
+            'password' => \Illuminate\Support\Facades\Hash::make($request->newPassword, , [
+                'rounds'  => 12,
+                'memory'  => 1024,
+                'time'    => 2,
+                'threads' => 2,
+            ])
+        ])->save();*/
+
+        // Verifying That a Password Matches a Hash
+        /*if (Hash::check('plain-text', $hashedPassword)) {
+            // The passwords match...
+        }*/
+
+        // Determining if a Password Needs to be Rehashed
+        /*if (Hash::needsRehash($hashed)) {
+            $hashed = Hash::make('plain-text');
+        }*/
+
         $user->status = 0;
+
+        /*
+         * Using the Encrypter
+         */
+        /*$request->user()->fill([
+            'token' => \Illuminate\Support\Facades\Crypt::encryptString($request->token),
+        ])->save();
+        try {
+            $decrypted = \Illuminate\Support\Facades\Crypt::decryptString($encryptedValue);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            // ...
+        }*/
+
         try {
             $user->save();
             //event(new UserRegistered($user));
