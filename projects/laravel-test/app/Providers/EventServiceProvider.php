@@ -5,6 +5,7 @@ namespace App\Providers;
 /*use App\Events\UserRegistered;
 use App\Listeners\SendEmailUserVerificationListener;*/
 
+use App\Listeners\UserEventSubscriber;
 use App\Models\User;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -32,11 +33,37 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        UserEventSubscriber::class,
+    ];
+
+    /**
      * Register any events for your application.
      */
     public function boot(): void
     {
-        //
+        /*
+         * Queueable Anonymous Event Listeners
+         */
+        /*Event::listen(
+            PodcastProcessed::class,
+            SendPodcastNotification::class,
+        );
+        Event::listen(queueable(function (PodcastProcessed $event) {
+            // ...
+        })->onConnection('redis')->onQueue('podcasts')->delay(now()->addSeconds(10)));
+        Event::listen(queueable(function (PodcastProcessed $event) {
+            // ...
+        })->catch(function (PodcastProcessed $event, Throwable $e) {
+            // The queued listener failed...
+        }));
+        Event::listen('event.*', function (string $eventName, array $data) {
+            // ...
+        });*/
     }
 
     /**
