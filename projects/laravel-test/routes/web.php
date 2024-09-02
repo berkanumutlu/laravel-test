@@ -171,3 +171,7 @@ Route::post('/user/{user}/mail', function (string $user) {
     ]);
     // ...
 });
+/*
+ * Mail, Queue
+ */
+Route::get('send-mail', [\App\Http\Controllers\Web\MailController::class, 'sendMail']);
