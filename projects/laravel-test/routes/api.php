@@ -24,3 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['cors'])->group(function () {
     Route::get('/api/data', 'DataController@index');
 });
+/*
+ * Auth Custom Guard
+ */
+Route::middleware('auth:api')->group(function () {
+    // ...
+});

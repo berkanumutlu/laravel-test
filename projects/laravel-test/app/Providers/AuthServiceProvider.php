@@ -21,6 +21,23 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        /*
+         * Auth - Custom Guards
+         */
+        /*Auth::extend('jwt', function (Application $app, string $name, array $config) {
+            // Return an instance of Illuminate\Contracts\Auth\Guard...
+            return new JwtGuard(Auth::createUserProvider($config['provider']));
+        });*/
+        /*Auth::viaRequest('custom-token', function (Request $request) {
+            return User::where('token', (string) $request->token)->first();
+        });*/
+        /*
+         * Custom Providers
+         */
+        /*Auth::provider('mongo', function (Application $app, array $config) {
+            // Return an instance of Illuminate\Contracts\Auth\UserProvider...
+
+            return new MongoUserProvider($app->make('mongo.connection'));
+        });*/
     }
 }

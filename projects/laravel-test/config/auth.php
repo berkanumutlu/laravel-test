@@ -43,7 +43,12 @@ return [
         'admin' => [
             'driver'   => 'session',
             'provider' => 'admins',
-        ]
+        ],
+        'api'   => [
+            //'driver'   => 'jwt',
+            'driver'   => 'custom-token',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -66,6 +71,7 @@ return [
     'providers' => [
         'users'  => [
             'driver' => 'eloquent',
+            //'driver' => 'mongo',
             'model'  => App\Models\User::class,
         ],
 
