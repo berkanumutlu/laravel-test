@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use app\Contracts\CustomCache;
+use App\Contracts\CustomCache;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;

@@ -2,7 +2,7 @@
 // php artisan make:controller Web/HomeController
 namespace App\Http\Controllers\Web;
 
-use App\Events\PusherEvent;
+//use App\Events\PusherEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -140,7 +140,7 @@ class HomeController extends Controller
         /*
          * Broadcasting - Pusher
          */
-        event(new PusherEvent('hello world'));
+        //event(new PusherEvent('hello world'));
 
         return view('web.home.index', compact([
             'person', 'name', 'age', 'uri', 'url', 'urlWithQueryString', 'fullUrlWithQuery', 'fullUrlWithoutQuery',

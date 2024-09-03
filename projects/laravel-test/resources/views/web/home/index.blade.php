@@ -98,7 +98,7 @@
         <hr>
         <div>
             <h6>Current Route</h6>
-            <p><strong>Route::current() (\Illuminate\Routing\Route):</strong> @dump(Route::current())</p>
+            {{--<p><strong>Route::current() (\Illuminate\Routing\Route):</strong> @dump(Route::current())</p>--}}
             <p><strong>Route::currentRouteName() (string):</strong> {{ Route::currentRouteName() }}</p>
             <p><strong>Route::currentRouteAction() (string):</strong> {{ Route::currentRouteAction() }}</p>
         </div>

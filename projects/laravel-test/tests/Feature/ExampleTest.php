@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
+// use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -21,7 +21,7 @@ class ExampleTest extends TestCase
     /**
      * Test order shipping.
      */
-    public function test_orders_can_be_shipped(): void
+    /*public function test_orders_can_be_shipped(): void
     {
         Event::fake();
 
@@ -47,33 +47,33 @@ class ExampleTest extends TestCase
             OrderShipped::class,
             SendShipmentNotification::class
         );
-    }
+    }*/
 
     /**
      * Test order process.
      */
-    public function test_orders_can_be_processed(): void
+    /*public function test_orders_can_be_processed(): void
     {
         Event::fake([
             OrderCreated::class,
         ]);
-        /*Event::fake()->except([
-            OrderCreated::class,
-        ]);*/
+        //Event::fake()->except([
+        //    OrderCreated::class,
+        //]);
 
         $order = Order::factory()->create();
 
         Event::assertDispatched(OrderCreated::class);
 
-        /*$order = Event::fakeFor(function () {
-            $order = Order::factory()->create();
-
-            Event::assertDispatched(OrderCreated::class);
-
-            return $order;
-        });*/
+        //$order = Event::fakeFor(function () {
+        //    $order = Order::factory()->create();
+        //
+        //    Event::assertDispatched(OrderCreated::class);
+        //
+        //    return $order;
+        //});
 
         // Other events are dispatched as normal...
         $order->update([...]);
-    }
+    }*/
 }

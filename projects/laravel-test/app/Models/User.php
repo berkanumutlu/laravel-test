@@ -51,4 +51,9 @@ class User extends Authenticatable
         }
         return $value;
     }
+
+    public function isAdmin()
+    {
+        return false;
+    }
 }
