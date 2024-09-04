@@ -94,3 +94,4 @@ sw.*
 *.swp
 # yarn.lock
 # package-lock.json
+**/build/

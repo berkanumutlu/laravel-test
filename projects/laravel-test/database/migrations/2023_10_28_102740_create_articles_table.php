@@ -38,6 +38,7 @@ return new class extends Migration {
             $table->string('title', 80);
             $table->string('slug');
             $table->text('body');
+            $table->tinyInteger('is_featured')->default(0);
             $table->integer('sort')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps(); // created_at, updated_at

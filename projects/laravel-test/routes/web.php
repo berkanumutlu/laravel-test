@@ -103,7 +103,7 @@ Route::get("/user/check/{role}", [\App\Http\Controllers\Web\UserController::clas
      ->name('article');*/
 Route::controller('LoginController')->group(function () {
     Route::get('login', "index")->name("login.index");
-    Route::post('login', "login");
+    Route::post('login', "login")->middleware(['throttle:login']);
     Route::get('logout', "logout")->name("logout");
 });
 Route::controller('RegisterController')->group(function () {

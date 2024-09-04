@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class ArticleController extends BaseController
      */
     public function index()
     {
-        dump("api article index");
+        //dump("api article index");
     }
 
     /**
@@ -26,7 +27,7 @@ class ArticleController extends BaseController
      */
     public function show(string $id)
     {
-        dump("api article show - " . $id);
+        //dump("api article show - " . $id);
     }
 
     /**
@@ -34,7 +35,7 @@ class ArticleController extends BaseController
      */
     public function update(Request $request, string $id)
     {
-        dump("api article updated - " . $id);
+        //dump("api article updated - " . $id);
     }
 
     /**
@@ -42,6 +43,6 @@ class ArticleController extends BaseController
      */
     public function destroy(string $id)
     {
-        dump("api article deleted - " . $id);
+        //dump("api article deleted - " . $id);
     }
 }

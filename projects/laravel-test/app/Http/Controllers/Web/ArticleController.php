@@ -34,7 +34,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        dump("article create");
+        //dump("article create");
     }
 
     /**
@@ -76,7 +76,7 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        dump("article edit - ".$id);
+        //dump("article edit - ".$id);
     }
 
     /**
@@ -84,7 +84,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dump("article updated - ".$id);
+        //dump("article updated - ".$id);
     }
 
     /**
@@ -92,6 +92,6 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        dump("article deleted - ".$id);
+        //dump("article deleted - ".$id);
     }
 }

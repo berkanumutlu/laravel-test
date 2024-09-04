@@ -24,6 +24,8 @@
                         {{ $records->onEachSide(1)->links() }}
                     </div>
                 @endif
+            @else
+                <p>{{ __('alert.articles_not_found') }}</p>
             @endif
         </div>
     </div>

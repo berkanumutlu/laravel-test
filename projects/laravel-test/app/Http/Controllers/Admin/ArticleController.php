@@ -173,6 +173,6 @@ class ArticleController extends BaseController
      */
     public function destroy(string $id)
     {
-        dump("admin article deleted #".$id);
+        //dump("admin article deleted #".$id);
     }
 }

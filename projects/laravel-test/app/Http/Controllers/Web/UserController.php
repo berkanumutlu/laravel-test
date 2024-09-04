@@ -15,12 +15,12 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        dump($request->all());
+        //dump($request->all());
     }
 
     public function update_all(Request $request)
     {
-        dump($request->all());
+        //dump($request->all());
     }
 
     public function delete($id)
@@ -36,16 +36,16 @@ class UserController extends Controller
 
     public function show(Request $request, $id)
     {
-        dump('User #'.$id.' show');
+        //dump('User #'.$id.' show');
     }
 
     public function show_name(Request $request, $name)
     {
-        dump('User #'.$name.' show name');
+        //dump('User #'.$name.' show name');
     }
 
     public function check_role(Request $request, $role)
     {
-        dump('User role is '.$role);
+        //dump('User role is '.$role);
     }
 }

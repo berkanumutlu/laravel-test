@@ -21,9 +21,9 @@
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="10"/>
         <env name="CACHE_DRIVER" value="array"/>
-        <env name="DB_DATABASE" value="${DB_DATABASE}"/>
+        <!--<env name="DB_DATABASE" value="${DB_DATABASE}"/>
         <env name="DB_USERNAME" value="${DB_USERNAME}"/>
-        <env name="DB_PASSWORD" value="${DB_PASSWORD}"/>
+        <env name="DB_PASSWORD" value="${DB_PASSWORD}"/>-->
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
