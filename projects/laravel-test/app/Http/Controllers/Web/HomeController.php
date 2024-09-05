@@ -142,10 +142,11 @@ class HomeController extends Controller
          */
         //event(new PusherEvent('hello world'));
 
+        $title = __('global.home_page');
         return view('web.home.index', compact([
             'person', 'name', 'age', 'uri', 'url', 'urlWithQueryString', 'fullUrlWithQuery', 'fullUrlWithoutQuery',
             'host', 'httpHost', 'schemeAndHttpHost', 'requestMethod', 'requestIsMethodGet', 'requestIsMethodPost',
-            'bearerToken', 'ipAddress', 'ipAddresses'
+            'bearerToken', 'ipAddress', 'ipAddresses', 'title'
         ]));
         //Debugbar::stopMeasure('render');
     }

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page - Laravel Website</title>
+        <link rel="stylesheet" href="http://localhost/assets/plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/assets/web/css/style.min.css">
+    
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="http://localhost">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="http://localhost">Home Page</a>
+                    
+                    
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link "
+                       href="http://localhost/about-us">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link "
+                       href="http://localhost/articles">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link "
+                       href="http://localhost/contact">Contact</a>
+                </li>
+                                <li class="nav-item">
+                    <a class="nav-link "
+                       href="http://localhost/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link "
+                       href="http://localhost/register">Register</a>
+                </li>
+                                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false"> en </a>
+                        <ul class="dropdown-menu">
+                                                            <li>
+                                    <a href="http://localhost/tr" class="dropdown-item">Türkçe</a>
+                                </li>
+                                                            <li>
+                                    <a href="http://localhost" class="dropdown-item">English</a>
+                                </li>
+                                                            <li>
+                                    <a href="http://localhost/de" class="dropdown-item">Deutsch</a>
+                                </li>
+                                                            <li>
+                                    <a href="http://localhost/fr" class="dropdown-item">Français</a>
+                                </li>
+                                                            <li>
+                                    <a href="http://localhost/es" class="dropdown-item">Español</a>
+                                </li>
+                                                            <li>
+                                    <a href="http://localhost/ru" class="dropdown-item">Русский</a>
+                                </li>
+                                                            <li>
+                                    <a href="http://localhost/ar" class="dropdown-item">عربي</a>
+                                </li>
+                                                            <li>
+                                    <a href="http://localhost/it" class="dropdown-item">Italiano</a>
+                                </li>
+                                                    </ul>
+                    </li>
+                                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search"
+                       aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="content">
+        <div class="container">
+        <div>
+            <h6>Compact variable</h6>
+            <p>Home Page Content</p>
+            <p>Global current language: en</p>
+            <p>Global data person: No Data</p>
+            <p>Name: berkan</p>
+            <p>Age: 25</p>
+                                                <p>Name: berkan</p>
+                                                    <p>Age:
+                                                        Young
+                                                    </p>
+                                    </div>
+        <hr>
+        <div>
+            <h6>Custom Directive</h6>
+            <form action="" method="POST">
+                
+                <input type="hidden" name="_method" value="DELETE">                <input type="hidden" name="_customMethod" value="BERKAN">
+                <input type="text" name="fullname">
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <hr>
+        <div>
+            <h6>Component Data Pass/Attributes/Slot</h6>
+            <label for="fullname">Ad Soyad</label>
+<input type="text" name="fullname"
+    id=fullname
+    
+    class="p-4 form-control" placelholder="Ad Soyad"
+    
+    placelholder="Ad Soyad"
+>
+        </div>
+        <hr>
+        <div>
+            <h6>Component Data Pass/Attributes/Slot</h6>
+                        <input type="text" name="fullname2"
+    
+    
+    
+    class="bg-danger bg-" type="text" name="fullname2" color="info"
+>
+        </div>
+        
+        <hr>
+        <div>
+            <h6>Current Language</h6>
+            <p>App::isLocale('en'): 1</p>
+            <p>App::currentLocale(): en</p>
+            <p>App::getLocale(): en</p>
+            <p>app()->currentLocale(): en</p>
+            <p>app()->getLocale(): en</p>
+            <p>Config::get('app.locale'): en</p>
+            <p>config()->get('app.locale'): en</p>
+        </div>
+        <hr>
+        <div>
+            <h6>Maintenance Mode</h6>
+            <p>To enable maintenance mode: <code>php artisan down</code></p>
+            <p>Refresh page after 15 seconds:<br>
+                <code>php artisan down --refresh=15</code><br>
+                <code>php artisan down --retry=60</code></p>
+            <p>Bypassing Maintenance Mode:<br>
+                <code>php artisan down --secret="1630542a-246b-4b66-afa1-dd72a4c43515"</code><br>
+                <code>https://example.com/1630542a-246b-4b66-afa1-dd72a4c43515</code><br>
+                <code>php artisan down --with-secret</code>
+            </p>
+            <p>Pre-Rendering the Maintenance Mode View:<br>
+                <code>php artisan down --render="errors::503"</code><br>
+                <code>php artisan down --redirect=/</code>
+            </p>
+            <p>Disabling Maintenance Mode: <code>php artisan up</code>
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h6>Current Route</h6>
+            
+            <p><strong>Route::currentRouteName() (string):</strong> home</p>
+            <p><strong>Route::currentRouteAction() (string):</strong> App\Http\Controllers\Web\HomeController@index</p>
+        </div>
+        <hr>
+        <div>
+            <h6>Request</h6>
+            <p>$request->path(): <code>/</code></p>
+            <p>$request->url(): <code>http://localhost</code></p>
+            <p>$request->fullUrl(): <code>http://localhost</code></p>
+            <p>$request->fullUrlWithQuery(['type' => 'phone']): <code>http://localhost/?type=phone</code></p>
+            <p>$request->fullUrlWithoutQuery(['type']): <code>http://localhost</code></p>
+            <hr>
+            <p>$request->host(): <code>localhost</code></p>
+            <p>$request->httpHost(): <code>localhost</code></p>
+            <p>$request->schemeAndHttpHost(): <code>http://localhost</code></p>
+            <hr>
+            <p>$request->method(): <code>GET</code></p>
+            <p>$request->isMethod('get'): <code>1</code></p>
+            <p>$request->isMethod('post'): <code></code></p>
+            <p>$request->bearerToken(): <code></code></p>
+            <hr>
+            <p>$request->ip(): <code>127.0.0.1</code></p>
+            <p>$request->ips(): <code>127.0.0.1</code></p>
+        </div>
+        <hr>
+        <div>
+            <h6>Blade Directives</h6>
+                                                                            <div class="pull-right">
+                    
+                </div>
+                        
+        </div>
+    </div>
+</div>
+<footer class="container-fluid bg-light">
+    <div class="container text-center">
+        <p class="mb-0">Copyright © 2023 Berkan Ümütlü. All Right Reserved.</p>
+    </div>
+</footer>
+<script src="http://localhost/assets/plugins/jquery/jquery-3.7.1.min.js"></script>
+<script src="http://localhost/assets/plugins/bootstrap/umd_popper.min.js"></script>
+<script src="http://localhost/assets/plugins/bootstrap/bootstrap.min.js"></script>
+
+</body>
+</html>

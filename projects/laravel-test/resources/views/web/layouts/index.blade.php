@@ -23,7 +23,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" aria-current="page"
-                       href="{{ route('home') }}">{{ __('global.home') }}</a>
+                       href="{{ route('home') }}">{{ __('global.home_page') }}</a>
                     {{--<a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>--}}
                     {{--<a class="nav-link {{ request()->route()->getName() == 'home' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>--}}
                 </li>

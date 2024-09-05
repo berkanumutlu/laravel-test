@@ -22,12 +22,11 @@ class WebServiceProvider extends ServiceProvider
     public function boot(Request $request): void
     {
         View::composer(['web.*', 'layouts.email', 'web.email.*'], function ($view) use ($request) {
-            $title = 'Laravel';
             $site_name = 'Laravel Website';
             $site_slogan = 'Site Slogan';
             $site_logo = !empty($settings->image_logo) ? asset($settings->image_logo) : asset('assets/web/images/logo.png');
             $current_language = get_current_language($request);
-            $view->with(compact(['title', 'site_name', 'site_slogan', 'site_logo', 'current_language']));
+            $view->with(compact(['site_name', 'site_slogan', 'site_logo', 'current_language']));
         });
     }
 }
