@@ -1,5 +1,6 @@
 <?php
 
+use Elasticsearch\ClientBuilder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -192,4 +193,12 @@ Route::name('order.')->controller('OrderController')->middleware('auth:web')->gr
     Route::get('orders', "index")->name('list');
     Route::get('order/{order:id}', "show")->name('detail');
     Route::get('order-shipped/{id}', "order_shipped")->name('detail');
+});
+/*
+ * Elastic Search
+ */
+Route::get('/elasticsearch-status', function () {
+    $client = ClientBuilder::create()->setHosts([config('elasticsearch.hosts')])->build();
+    $response = $client->info();
+    dd($response);
 });

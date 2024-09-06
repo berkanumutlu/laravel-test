@@ -32,11 +32,13 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->id('Id');
+            $table->id();
+            //$table->id('Id');
             $table->integer('language_group_id')->nullable();
             $table->unsignedBigInteger('language_id');
+            $table->unsignedBigInteger('category_id');
             $table->string('title', 80);
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('body');
             $table->tinyInteger('is_featured')->default(0);
             $table->integer('sort')->nullable();

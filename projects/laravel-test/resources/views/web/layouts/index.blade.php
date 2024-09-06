@@ -70,9 +70,9 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="{{ __('global.search') }}"
-                       aria-label="{{ __('global.search') }}">
+            <form action="{{ route('article.list') }}" method="GET" class="d-flex" role="search">
+                <input class="form-control me-2" name="search" type="search" placeholder="{{ __('global.search') }}"
+                       aria-label="{{ __('global.search') }}" value="{{ request('search') ?? '' }}">
                 <button class="btn btn-outline-success" type="submit">{{ __('global.search') }}</button>
             </form>
         </div>

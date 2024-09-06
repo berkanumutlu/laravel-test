@@ -23,6 +23,7 @@ docker-php-ext-install gd
 RUN apt-get update && \
     apt-get install -y libxml2-dev
 RUN docker-php-ext-install soap
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

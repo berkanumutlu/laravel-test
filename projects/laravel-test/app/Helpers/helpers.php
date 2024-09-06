@@ -1,4 +1,5 @@
 <?php
+
 if (!function_exists('date_format_custom')) {
     function date_format_custom(string $date): string
     {
@@ -25,5 +26,26 @@ if (!function_exists('get_current_language')) {
             }
         }
         return session()->get('current_language');
+    }
+}
+if (!function_exists('elasticsearch_to_paginator')) {
+    function elasticsearch_to_paginator(
+        array $elasticsearch,
+        $model,
+        $perPage = 1,
+        $page = 1
+    ): \Illuminate\Pagination\LengthAwarePaginator {
+        $total = $elasticsearch['hits']['total']['value'];
+        $records = array_map(function ($hit) use ($model) {
+            return new $model($hit['_source']);
+            //return $model::find($hit['_id']);
+        }, $elasticsearch['hits']['hits']);
+        return new \Illuminate\Pagination\LengthAwarePaginator(
+            $records,
+            $total,
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
     }
 }

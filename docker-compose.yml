@@ -14,6 +14,8 @@ services:
     environment:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - app-network
   php7:
     image: php:7.4-fpm
     build:
@@ -28,9 +30,11 @@ services:
     environment:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - app-network
   nginx:
     platform: linux/x86_64
-    image: nginx:1.13.8
+    image: nginx:1.25.5
     container_name: ${PROJECT_NAME}-nginx
     ports:
       - "80:80"
@@ -40,11 +44,15 @@ services:
     depends_on:
       - php8
       - php7
+    networks:
+      - app-network
   mysql:
     image: mysql:5.7
     container_name: ${PROJECT_NAME}-db
     ports:
       - "3306:3306"
+    volumes:
+      - ./docker-compose:/docker-entrypoint-initdb.d
     depends_on:
       - php8
       - php7
@@ -55,6 +63,8 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
       SERVICE_NAME: mysql
+    networks:
+      - app-network
   mysql_phpmyadmin:
     image: phpmyadmin:5.2.1
     container_name: ${PROJECT_NAME}-phpmyadmin
@@ -68,6 +78,8 @@ services:
       UPLOAD_LIMIT: 2048M
       MEMORY_LIMIT: 1024M
       MAX_EXECUTION_TIME: 3000
+    networks:
+      - app-network
   redis:
     image: redis:latest
     container_name: ${PROJECT_NAME}-redis
@@ -76,6 +88,8 @@ services:
       - "6379:6379"
     volumes:
       - /docker/redis:/data
+    networks:
+      - app-network
   redisui:
     image: patrikx3/p3x-redis-ui:latest
     container_name: ${PROJECT_NAME}-redisui
@@ -83,3 +97,29 @@ services:
       - "7843:7843"
     volumes:
       - /docker/p3x-redis-ui-settings:/settings
+    networks:
+      - app-network
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - app-network
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

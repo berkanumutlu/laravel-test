@@ -5,7 +5,7 @@
 @section("content")
     <div class="container">
         <div class="row">
-            @if(!empty($records))
+            @if($records->isNotEmpty())
                 @foreach($records as $item)
                     <div class="col-lg-4">
                         <x-article :item="$item">

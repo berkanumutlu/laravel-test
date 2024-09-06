@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\CustomCache;
+use Elasticsearch\ClientBuilder;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -38,6 +39,15 @@ class AppServiceProvider extends ServiceProvider
          */
         $this->app->singleton(Repository::class, function ($app) {
             return new CustomCache;
+        });
+
+        /*
+         * Elastic Search
+         */
+        $this->app->singleton('elasticsearch', function ($app) {
+            return ClientBuilder::create()
+                ->setHosts([config('elasticsearch.hosts')])
+                ->build();
         });
     }
 

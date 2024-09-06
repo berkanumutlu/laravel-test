@@ -19,13 +19,79 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $current_language = session()->get('current_language')->id;
-        $records = Article::query()->where('language_id', $current_language)->whereNot('category_id', null)
-            ->select(['id', 'title', 'slug', 'body'])
-            ->orderBy('created_at', 'desc')->paginate(6);
-        $title = 'Article List';
+        $perPage = 6;
+        $page = $request->input('page', 1);
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $params = [
+                'index'   => 'articles',
+                '_source' => ['id', 'title', 'slug', 'body'],
+                'body'    => [
+                    'query' => [
+                        'bool' => [
+                            'must'   => [
+                                [
+                                    'multi_match' => [
+                                        'query'  => $search,
+                                        'fields' => ['title', 'slug', 'body']
+                                    ]
+                                ],
+                                ['term' => ['language_id' => $current_language]],
+                                ['term' => ['is_active' => 1]]
+                            ],
+                            'filter' => [
+                                ['exists' => ['field' => 'category_id']]
+                            ]
+                        ]
+                    ],
+                    'sort'  => [
+                        ['created_at' => ['order' => 'desc']],
+                        '_score'
+                    ],
+                    'from'  => ($page - 1) * $perPage,
+                    'size'  => $perPage
+                ]
+            ];
+            $results = app('elasticsearch')->search($params);
+            $records = elasticsearch_to_paginator($results, Article::class, $perPage, $page);
+            $title = "Search Article: \"{$search}\"";
+        } else {
+            if (app('elasticsearch')->indices()->exists(['index' => 'articles'])) {
+                $params = [
+                    'index'   => 'articles',
+                    '_source' => ['id', 'title', 'slug', 'body'],
+                    'body'    => [
+                        'query' => [
+                            'bool' => [
+                                'must'   => [
+                                    ['term' => ['language_id' => $current_language]],
+                                    ['term' => ['is_active' => 1]]
+                                ],
+                                'filter' => [
+                                    ['exists' => ['field' => 'category_id']]
+                                ]
+                            ]
+                        ],
+                        'sort'  => [
+                            ['created_at' => ['order' => 'desc']],
+                            '_score'
+                        ],
+                        'from'  => ($page - 1) * $perPage,
+                        'size'  => $perPage
+                    ]
+                ];
+                $results = app('elasticsearch')->search($params);
+                $records = elasticsearch_to_paginator($results, Article::class, $perPage, $page);
+            } else {
+                $records = Article::query()->where('language_id', $current_language)->whereNotNull('category_id')
+                    ->select(['id', 'title', 'slug', 'body'])
+                    ->orderBy('created_at', 'desc')->paginate($perPage);
+            }
+            $title = 'Article List';
+        }
         return view('web.article.index', compact(['title', 'records']));
     }
 
