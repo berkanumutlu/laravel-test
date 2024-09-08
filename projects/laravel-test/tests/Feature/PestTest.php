@@ -20,7 +20,9 @@ afterAll(function () {
 use App\Mail\UserVerificationMail;
 use App\Mail\WelcomeMail;
 use App\Models\User;
+use App\Notifications\UserVerificationNotification;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 test('test home page', function () {
@@ -91,9 +93,16 @@ it('creates a fake user and sends email verification mail', function () {
         'email_verified_at' => null
     ]);
     $token = Str::random(60);
-
     Mail::to($user->email)->queue(new UserVerificationMail($user, $token));
     Mail::assertQueued(UserVerificationMail::class, function ($mail) use ($user) {
         return $mail->hasTo($user->email);
     });
+});
+it('creates a fake user and sends verification notification', function () {
+    Notification::fake();
+    $user = createUser();
+    Notification::assertSentTo($user, UserVerificationNotification::class,
+        function ($notification, $channels) use ($user) {
+            return in_array('mail', $channels);
+        });
 });

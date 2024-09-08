@@ -46,7 +46,7 @@ expect()->extend('toBeOne', function () {
 
 function something()
 {
-    // ..
+    // ...
 }
 
 function createUser(): \App\Models\User

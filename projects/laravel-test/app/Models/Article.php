@@ -2,7 +2,6 @@
 // php artisan make:model Article
 namespace App\Models;
 
-use Elasticsearch\ClientBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,7 +35,7 @@ class Article extends Model
     /*
      * Ön tarafta hangi alanların gizleneceğini belirtir.
      */
-    protected $hidden = ['id', 'created_at'];
+    protected $hidden = ['created_at'];
     /*
      * Alanlar için tür dönüşümü yaptırmayı sağlıyor.
      */
@@ -87,7 +86,7 @@ class Article extends Model
     // Elasticsearch'e ekleme
     public function addToIndex()
     {
-        ClientBuilder::create()->build()->index([
+        app('elasticsearch')->index([
             'index' => 'articles',
             'id'    => $this->id,
             'body'  => $this->toArray()
@@ -97,17 +96,19 @@ class Article extends Model
     // Elasticsearch'te güncelleme
     public function updateIndex()
     {
-        ClientBuilder::create()->build()->update([
+        app('elasticsearch')->update([
             'index' => 'articles',
             'id'    => $this->id,
-            'body'  => $this->toArray()
+            'body'  => [
+                'doc' => $this->toArray()
+            ]
         ]);
     }
 
     // Elasticsearch'ten silme
     public function deleteFromIndex()
     {
-        ClientBuilder::create()->build()->delete([
+        app('elasticsearch')->delete([
             'index' => 'articles',
             'id'    => $this->id
         ]);

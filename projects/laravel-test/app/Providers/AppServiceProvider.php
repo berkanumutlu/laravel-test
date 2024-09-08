@@ -37,14 +37,14 @@ class AppServiceProvider extends ServiceProvider
         /*
          * Binding Contracts to Implementations
          */
-        $this->app->singleton(Repository::class, function ($app) {
+        $this->app->singleton(Repository::class, function () {
             return new CustomCache;
         });
 
         /*
          * Elastic Search
          */
-        $this->app->singleton('elasticsearch', function ($app) {
+        $this->app->singleton('elasticsearch', function () {
             return ClientBuilder::create()
                 ->setHosts([config('elasticsearch.hosts')])
                 ->build();
